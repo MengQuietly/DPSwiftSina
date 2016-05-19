@@ -15,17 +15,17 @@ DerivedData
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata
+xcuserdata/
 
 ## Other
-*.xccheckout
 *.moved-aside
 *.xcuserstate
-*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
+*.dSYM.zip
+*.dSYM
 
 ## Playgrounds
 timeline.xctimeline
@@ -60,4 +60,26 @@ Carthage/Build
 # https://github.com/fastlane/fastlane/blob/master/docs/Gitignore.md
 
 fastlane/report.xml
+fastlane/Preview.html
 fastlane/screenshots
+fastlane/test_output
+
+## Other
+*.moved-aside
+
+# 忽略DSStore文件
+.DS_Store
+*/build/*
+*.xccheckout
+
+# 忽略Xcode本地用户配置信息
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+xcshareddata/
+.metadata/
+
+# 忽略`Pods/`和`Podfile.lock`
+Pods/
+Podfile.lock
+
