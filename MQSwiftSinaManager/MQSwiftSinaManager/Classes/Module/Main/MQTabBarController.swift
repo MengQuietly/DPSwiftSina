@@ -10,6 +10,13 @@ import UIKit
 
 class MQTabBarController: UITabBarController {
 
+    /// 苹果专门为 “代码创建视图” 层次机构设计的函数，可和 XIB／SB 等价
+    override func loadView() {
+        super.loadView()
+    }
+
+    /// 视图将要出现，可能会被调用多次
+    /// 不适合做多次执行的代码
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

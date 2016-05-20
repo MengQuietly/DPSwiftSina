@@ -18,6 +18,9 @@
 		09DA0AE91CEC75EE0037C88F /* MQSwiftSinaManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0AE81CEC75EE0037C88F /* MQSwiftSinaManagerUITests.swift */; };
 		09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6E81CEEEE37009DF2B8 /* MQTabBarController.swift */; };
 		09E1A6EB1CEEF60F009DF2B8 /* MQVisitorLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6EA1CEEF60F009DF2B8 /* MQVisitorLoginView.swift */; };
+		09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6EC1CEEF915009DF2B8 /* MQOAuthController.swift */; };
+		09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */; };
+		09E1A6F11CEEFC12009DF2B8 /* MQRequestURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */; };
 		49B583DDADAEC540101DBC77 /* Pods_MQSwiftSinaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		09DA0AEA1CEC75EE0037C88F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09E1A6E81CEEEE37009DF2B8 /* MQTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQTabBarController.swift; sourceTree = "<group>"; };
 		09E1A6EA1CEEF60F009DF2B8 /* MQVisitorLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQVisitorLoginView.swift; sourceTree = "<group>"; };
+		09E1A6EC1CEEF915009DF2B8 /* MQOAuthController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQOAuthController.swift; sourceTree = "<group>"; };
+		09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNetworkingTool.swift; sourceTree = "<group>"; };
+		09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQRequestURL.swift; sourceTree = "<group>"; };
 		5985A9386AE3E96E7CF49B85 /* Pods-MQSwiftSinaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.release.xcconfig"; sourceTree = "<group>"; };
 		9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MQSwiftSinaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DB3B0272F8E363DD919949 /* Pods-MQSwiftSinaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.debug.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +163,7 @@
 		09760A4D1CEEB19F00726AD1 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
+				09E1A6EC1CEEF915009DF2B8 /* MQOAuthController.swift */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -172,6 +179,8 @@
 		09760A4F1CEEB19F00726AD1 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */,
+				09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -439,11 +448,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E1A6F11CEEFC12009DF2B8 /* MQRequestURL.swift in Sources */,
 				09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */,
+				09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */,
 				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,
 				09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */,
 				09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */,
 				09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */,
+				09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */,
 				09E1A6EB1CEEF60F009DF2B8 /* MQVisitorLoginView.swift in Sources */,
 				09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,

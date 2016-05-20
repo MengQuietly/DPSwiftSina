@@ -12,7 +12,9 @@ class MQHomeController: MQBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        visitorView?.setupInfo(nil, message: "关注一些人，回这里看看有惊喜")
+        
     }
 
     override func didReceiveMemoryWarning() {

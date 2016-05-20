@@ -12,6 +12,9 @@ class MQMessageController: MQBaseTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        visitorView?.setupInfo("visitordiscover_image_message", message: "登录后，别人评论你的微博，发给你的消息，都会在这里收到通知")
+        
     }
 
     override func didReceiveMemoryWarning() {

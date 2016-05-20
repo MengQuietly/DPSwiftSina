@@ -11,7 +11,7 @@ import UIKit
 class MQBaseTableViewController: UITableViewController {
     
     // 用户登录标记
-    var userLoaon = true
+    var userLoaon = false
 
     // 用户登录视图：每个控制器各自拥有自己的 visitorView
     // 提示：若使用懒加载，会在用户登录成功后，视图仍被创建，虽不影响执行，但会消耗内存
@@ -25,7 +25,8 @@ class MQBaseTableViewController: UITableViewController {
     
     /// 设置访问视图
     private func setupVistorView(){
-        view = UIView() // 替换根视图
+        visitorView = MQVisitorLoginView()
+        view = visitorView // 替换根视图
         
         // 设置导航栏按钮
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(registerBtnClick))
@@ -42,6 +43,9 @@ class MQBaseTableViewController: UITableViewController {
     
     @objc private func loginBtnClick(){
         print(#function)
+        
+        let navVC = UINavigationController(rootViewController: MQOAuthController())
+        presentViewController(navVC, animated: true, completion: nil)
     }
 
     override func viewDidLoad() {
