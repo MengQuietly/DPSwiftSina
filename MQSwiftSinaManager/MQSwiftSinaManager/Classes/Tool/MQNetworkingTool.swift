@@ -59,7 +59,7 @@ class MQNetworkingTool: AFHTTPSessionManager {
         return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
             
             let successCallBack = { (task:NSURLSessionDataTask, result:AnyObject?) in
-                print("网络请求－ 成功回调结果：\(result)")
+                printLog("网络请求－ 成功回调结果：\(result)")
                 
                 /** 将结果发送给订阅者*/
                 subscriber.sendNext(result)
@@ -68,18 +68,18 @@ class MQNetworkingTool: AFHTTPSessionManager {
                 
             }
             let failureCallBack = { (task:NSURLSessionDataTask?, error:NSError) in
-                print("网络请求－失败回调结果：\(error)")
+                printLog("网络请求－失败回调结果：\(error)", logError: true)
                 /** 发送错误 */
                 subscriber.sendError(error)
             }
             
             if method == .GET {
                 self.GET(URLString, parameters: parameter, progress: { (progress) in
-                    print("Get 请求进度：\(progress.localizedDescription)")
+                    printLog("Get 请求进度：\(progress.localizedDescription)")
                     }, success: successCallBack, failure: failureCallBack)
             }else{
                 self.POST(URLString, parameters: parameter, progress: { (progress:NSProgress) in
-                    print("Post 请求进度：\(progress.localizedDescription)")
+                    printLog("Post 请求进度：\(progress.localizedDescription)")
                     }, success: successCallBack, failure: failureCallBack)
             }
             return nil

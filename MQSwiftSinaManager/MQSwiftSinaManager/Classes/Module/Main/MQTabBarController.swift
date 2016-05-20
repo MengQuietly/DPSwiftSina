@@ -87,7 +87,7 @@ class MQTabBarController: UITabBarController {
     /// swift 中，所有的函数如果不使用 private 修饰，是全局共享的
     /// @objc 关键字能够保证运行循环能够调用，走的 oc 的消息机制，调用之前不再判断方法是否存在,和 private 联用，就能够做到对方法的保护
     @objc private func composeBtnClick(){
-        print(#function)
+        printLog(#function)
     }
 
     override func didReceiveMemoryWarning() {

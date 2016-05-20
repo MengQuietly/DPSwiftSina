@@ -38,11 +38,11 @@ class MQBaseTableViewController: UITableViewController {
     }
     
     @objc private func registerBtnClick(){
-        print(#function)
+        printLog(#function)
     }
     
     @objc private func loginBtnClick(){
-        print(#function)
+        printLog(#function)
         
         let navVC = UINavigationController(rootViewController: MQOAuthController())
         presentViewController(navVC, animated: true, completion: nil)

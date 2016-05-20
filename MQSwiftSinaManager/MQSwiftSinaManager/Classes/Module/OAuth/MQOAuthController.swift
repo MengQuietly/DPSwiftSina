@@ -31,7 +31,7 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
     
     /// 自动填充
     @objc private func autoLoginBtnClick(){
-        print(#function)
+        printLog(#function)
         
         let autoJS = "document.getElementById('userId').value = '18716655045@163.com';" +
         "document.getElementById('passwd').value = '521014!wenjing!';"
@@ -88,14 +88,14 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
             
             // 4. 调用网络方法，获取 token
             MQNetworkingTool.shareManager.loadAccessToken(code).subscribeNext({ (result) in
-                print("获取 accessToken 成功结果： \(result)")
+                printLog("获取 accessToken 成功结果： \(result)")
                 
                 }, error: { (error) in
-                    print("获取 accessToken 失败结果： \(error)")
+                    printLog("获取 accessToken 失败结果： \(error)", logError: true)
             })
             
         }else{
-            print("取消")
+            printLog("取消", logError: true)
         }
         return false
     }
