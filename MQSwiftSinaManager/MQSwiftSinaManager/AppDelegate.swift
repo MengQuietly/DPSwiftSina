@@ -15,9 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // 设置外观
+        setupAppearance()
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.backgroundColor = UIColor.redColor()
+        window?.rootViewController = MQTabBarController()
+        window?.makeKeyAndVisible()
+        
         return true
     }
+    
+    /// 修改 navBar、tabBar 字体颜色
+    /// 设置全局外观：修改要尽早，一经设置，全局有效
+    func setupAppearance(){
+        UINavigationBar.appearance().tintColor = UIColor.orangeColor()
+        UITabBar.appearance().tintColor = UIColor.redColor()
+    }
+
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

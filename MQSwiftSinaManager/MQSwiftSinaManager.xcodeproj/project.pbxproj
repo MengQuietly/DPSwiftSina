@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */; };
+		09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */; };
+		09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */; };
+		09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A701CEEBF8800726AD1 /* MQDiscoverController.swift */; };
+		09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A721CEEBF9A00726AD1 /* MQProfileController.swift */; };
 		09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */; };
-		09DA0ACB1CEC75EE0037C88F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0ACA1CEC75EE0037C88F /* ViewController.swift */; };
 		09DA0AD01CEC75EE0037C88F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */; };
 		09DA0ADE1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0ADD1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift */; };
 		09DA0AE91CEC75EE0037C88F /* MQSwiftSinaManagerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0AE81CEC75EE0037C88F /* MQSwiftSinaManagerUITests.swift */; };
+		09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6E81CEEEE37009DF2B8 /* MQTabBarController.swift */; };
 		49B583DDADAEC540101DBC77 /* Pods_MQSwiftSinaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,9 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQBaseTableViewController.swift; sourceTree = "<group>"; };
+		09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQHomeController.swift; sourceTree = "<group>"; };
+		09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQMessageController.swift; sourceTree = "<group>"; };
+		09760A701CEEBF8800726AD1 /* MQDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQDiscoverController.swift; sourceTree = "<group>"; };
+		09760A721CEEBF9A00726AD1 /* MQProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQProfileController.swift; sourceTree = "<group>"; };
 		09DA0AC51CEC75EE0037C88F /* MQSwiftSinaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQSwiftSinaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		09DA0ACA1CEC75EE0037C88F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09DA0AD41CEC75EE0037C88F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09DA0AD91CEC75EE0037C88F /* MQSwiftSinaManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MQSwiftSinaManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +53,7 @@
 		09DA0AE41CEC75EE0037C88F /* MQSwiftSinaManagerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MQSwiftSinaManagerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09DA0AE81CEC75EE0037C88F /* MQSwiftSinaManagerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQSwiftSinaManagerUITests.swift; sourceTree = "<group>"; };
 		09DA0AEA1CEC75EE0037C88F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09E1A6E81CEEEE37009DF2B8 /* MQTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQTabBarController.swift; sourceTree = "<group>"; };
 		5985A9386AE3E96E7CF49B85 /* Pods-MQSwiftSinaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.release.xcconfig"; sourceTree = "<group>"; };
 		9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MQSwiftSinaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DB3B0272F8E363DD919949 /* Pods-MQSwiftSinaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +85,108 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09760A461CEEB19F00726AD1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				09760A471CEEB19F00726AD1 /* Model */,
+				09760A481CEEB19F00726AD1 /* Module(功能模块) */,
+				09760A4F1CEEB19F00726AD1 /* Tool */,
+				09760A501CEEB19F00726AD1 /* View */,
+				09760A511CEEB19F00726AD1 /* ViewModel */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		09760A471CEEB19F00726AD1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		09760A481CEEB19F00726AD1 /* Module(功能模块) */ = {
+			isa = PBXGroup;
+			children = (
+				09760A4B1CEEB19F00726AD1 /* Main */,
+				09760A4D1CEEB19F00726AD1 /* OAuth */,
+				09760A491CEEB19F00726AD1 /* Discover */,
+				09760A4A1CEEB19F00726AD1 /* Home */,
+				09760A4C1CEEB19F00726AD1 /* Message */,
+				09760A4E1CEEB19F00726AD1 /* Profile */,
+			);
+			name = "Module(功能模块)";
+			path = Module;
+			sourceTree = "<group>";
+		};
+		09760A491CEEB19F00726AD1 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				09760A701CEEBF8800726AD1 /* MQDiscoverController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		09760A4A1CEEB19F00726AD1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		09760A4B1CEEB19F00726AD1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */,
+				09E1A6E81CEEEE37009DF2B8 /* MQTabBarController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		09760A4C1CEEB19F00726AD1 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		09760A4D1CEEB19F00726AD1 /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		09760A4E1CEEB19F00726AD1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				09760A721CEEBF9A00726AD1 /* MQProfileController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		09760A4F1CEEB19F00726AD1 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		09760A501CEEB19F00726AD1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09760A511CEEB19F00726AD1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		09DA0ABC1CEC75EE0037C88F = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +212,8 @@
 		09DA0AC71CEC75EE0037C88F /* MQSwiftSinaManager */ = {
 			isa = PBXGroup;
 			children = (
+				09760A461CEEB19F00726AD1 /* Classes */,
 				09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */,
-				09DA0ACA1CEC75EE0037C88F /* ViewController.swift */,
 				09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */,
 				09DA0AD41CEC75EE0037C88F /* Info.plist */,
 			);
@@ -324,8 +436,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09DA0ACB1CEC75EE0037C88F /* ViewController.swift in Sources */,
+				09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */,
+				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,
+				09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */,
+				09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */,
 				09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */,
+				09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */,
+				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,10 +568,12 @@
 			baseConfigurationReference = D2DB3B0272F8E363DD919949 /* Pods-MQSwiftSinaManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = MQSwiftSinaManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengQuietly.MQSwiftSinaManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -463,10 +582,12 @@
 			baseConfigurationReference = 5985A9386AE3E96E7CF49B85 /* Pods-MQSwiftSinaManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = MQSwiftSinaManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mengQuietly.MQSwiftSinaManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
