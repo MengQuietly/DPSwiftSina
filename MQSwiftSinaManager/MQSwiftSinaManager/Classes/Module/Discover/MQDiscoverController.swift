@@ -2,7 +2,7 @@
 //  MQDiscoverController.swift
 //  MQSwiftSinaManager
 //
-//  Created by 文静 on 16/5/20.
+//  Created by mengmeng on 16/5/20.
 //  Copyright © 2016年 mengQuietly. All rights reserved.
 //
 

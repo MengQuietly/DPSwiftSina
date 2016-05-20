@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MQSwiftSinaManager
 //
-//  Created by 文静 on 16/5/18.
+//  Created by mengmeng on 16/5/18.
 //  Copyright © 2016年 mengQuietly. All rights reserved.
 //
 
@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // 设置外观
