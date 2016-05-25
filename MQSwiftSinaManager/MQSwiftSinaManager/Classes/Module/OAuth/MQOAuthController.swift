@@ -34,7 +34,7 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
         printLog(#function)
         
         let autoJS = "document.getElementById('userId').value = '18716655045@163.com';" +
-        "document.getElementById('passwd').value = '521014!wenjing!';"
+        "document.getElementById('passwd').value = '921014!wenjing!';"
         // 执行 js 脚本
         webView.stringByEvaluatingJavaScriptFromString(autoJS)
         
@@ -85,10 +85,15 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
         if let query = urlParameter where query.hasPrefix("code="){
             // 3. 如果有，获取 code
             let code = query.substringFromIndex("code=".endIndex)
+            printLog("请求码: + \(code)")
             
             // 4. 调用网络方法，获取 token
             MQNetworkingTool.shareManager.loadAccessToken(code).subscribeNext({ (result) in
                 printLog("获取 accessToken 成功结果： \(result)")
+                let account = MQAccountInfo(dict: result as! [String : AnyObject])
+                printLog("返回对象：\(account)")
+                
+                self.loadAccessInfo(account)
                 
                 }, error: { (error) in
                     printLog("获取 accessToken 失败结果： \(error)", logError: true)
@@ -98,6 +103,26 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
             printLog("取消", logError: true)
         }
         return false
+    }
+
+    // MARK: - 网络加载
+    /// 加载用户信息
+    private func loadAccessInfo(accountInfo:MQAccountInfo){
+        MQNetworkingTool.shareManager.loadUserInfo(accountInfo.access_token!, uid: accountInfo.uid!).subscribeNext({ (result) in
+            let dict = result as! [String: AnyObject]
+            printLog("加载用户信息 成功结果：result = \(result),dict = \(dict)")
+            accountInfo.name = dict["name"] as? String
+            accountInfo.avatar_large = dict["avatar_large"] as? String
+            
+            printLog("accountInfo=\(accountInfo)")
+            // 保存帐号
+            accountInfo.saveUserAccount()
+            
+            }, error: { (error) in
+                printLog("加载用户信息 失败结果： \(error)", logError: true)
+        }) { () -> Void in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,3 +10,5 @@
 let oauthURL = "https://api.weibo.com/oauth2/authorize"
 /// 获取授权过的Access Token：POST
 let accessTokenURL = "https://api.weibo.com/oauth2/access_token"
+/// 根据用户ID获取用户信息
+let usersShowURL = "https://api.weibo.com/2/users/show.json"

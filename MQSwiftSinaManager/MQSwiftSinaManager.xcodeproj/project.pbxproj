@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
 		09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */; };
 		09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */; };
 		09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
 		09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQBaseTableViewController.swift; sourceTree = "<group>"; };
 		09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQHomeController.swift; sourceTree = "<group>"; };
 		09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQMessageController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 		09760A471CEEB19F00726AD1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,
 				09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */,
 				09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */,
+				0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */,
 				09E1A6F31CEF022F009DF2B8 /* MQCommonTools.swift in Sources */,
 				09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */,
 				09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */,

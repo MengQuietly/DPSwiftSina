@@ -2,7 +2,7 @@
 //  MQSwiftSinaManagerUITests.swift
 //  MQSwiftSinaManagerUITests
 //
-//  Created by 文静 on 16/5/18.
+//  Created by mengmeng on 16/5/18.
 //  Copyright © 2016年 mengQuietly. All rights reserved.
 //
 

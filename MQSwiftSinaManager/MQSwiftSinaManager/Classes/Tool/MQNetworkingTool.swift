@@ -19,7 +19,7 @@ enum MQRequestMethod: String {
 class MQNetworkingTool: AFHTTPSessionManager {
     // MARK: - App 信息
     private let clientId = "3170863229" // appKey
-    private let appSecret = "26d9fb97279ccde43d2130df2407425a" // appSecret
+    private let appSecret = "e84b7f8fc7e5663e02899f20c6639ef7" // appSecret
     let redirectUri = "http://www.baidu.com"
     
     /// 网络单例
@@ -45,9 +45,21 @@ class MQNetworkingTool: AFHTTPSessionManager {
     ///
     /// - see: [http://open.weibo.com/wiki/OAuth2/access_token](http://open.weibo.com/wiki/OAuth2/access_token)
     func loadAccessToken(code:String) -> RACSignal{
-        let parameterDict = ["client_id":clientId,"client_secret":appSecret, "code":code,"redirect_uri":redirectUri]
+        let parameterDict = ["client_id":clientId,"client_secret":appSecret, "grant_type": "authorization_code","code":code,"redirect_uri":redirectUri]
         return request(.POST, URLString: accessTokenURL, parameter: parameterDict)
     }
+    
+    /// 加载用户信息
+    ///
+    /// - parameter token: token
+    /// - parameter uid:   uid
+    ///
+    /// - returns: RACSignal
+    func loadUserInfo(token:String,uid:String) ->RACSignal{
+        let parameterDict = ["access_token":token,"uid":uid]
+        return request(.GET, URLString: usersShowURL, parameter: parameterDict)
+    }
+    
     /// 网络请求方法
     ///
     /// - parameter method:    method
@@ -85,5 +97,49 @@ class MQNetworkingTool: AFHTTPSessionManager {
             return nil
         })
     }
-
+    
+    // MARK: - 测试返回结果类型的请求方法
+    /// 获取 AccessToken(测试返回结果代码)
+    func loadAccessTokenToTestBackType(code:String) -> RACSignal{
+        let parameterDict = ["client_id":clientId,"client_secret":appSecret,"grant_type": "authorization_code", "code":code,"redirect_uri":redirectUri]
+        // 测试返回数据的代码：将结果转换成字符串（不让 AFN 做 JSON 反序列化）
+        // 响应数据格式是 二进制的
+        responseSerializer = AFHTTPResponseSerializer()
+        return requestToTestBackType(.POST, URLString: accessTokenURL, parameter: parameterDict)
+    }
+    
+    /// 网络请求方法(测试返回结果代码)
+    func requestToTestBackType(method:MQRequestMethod,URLString:String,parameter:[String:AnyObject]?)->RACSignal{
+        return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
+            
+            let successCallBack = { (task:NSURLSessionDataTask, result:AnyObject?) in
+                printLog("网络请求－ 成功回调结果：\(result)")
+                
+                let str = NSString(data: result as! NSData, encoding: NSUTF8StringEncoding)
+                printLog(str)
+                
+                /** 将结果发送给订阅者*/
+                subscriber.sendNext(str)
+                /** 发送完成 */
+                subscriber.sendCompleted()
+                
+            }
+            let failureCallBack = { (task:NSURLSessionDataTask?, error:NSError) in
+                printLog("网络请求－失败回调结果：\(error)", logError: true)
+                /** 发送错误 */
+                subscriber.sendError(error)
+            }
+            
+            if method == .GET {
+                self.GET(URLString, parameters: parameter, progress: { (progress) in
+                    printLog("Get 请求进度：\(progress.localizedDescription)")
+                    }, success: successCallBack, failure: failureCallBack)
+            }else{
+                self.POST(URLString, parameters: parameter, progress: { (progress:NSProgress) in
+                    printLog("Post 请求进度：\(progress.localizedDescription)")
+                    }, success: successCallBack, failure: failureCallBack)
+            }
+            return nil
+        })
+    }
 }
