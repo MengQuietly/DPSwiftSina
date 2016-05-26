@@ -33,8 +33,11 @@ class MQAccountViewModel: NSObject {
                 let accountInfo = MQAccountInfo(dict: result as! [String : AnyObject])
                 printLog("返回对象：\(accountInfo)")
                 
+                // 设置属性（不设置，将为nil）
+                self.userAccount = accountInfo 
+                
                 /// 加载用户信息
-                MQNetworkingTool.shareManager.loadUserInfo(accountInfo.access_token!, uid: accountInfo.uid!).subscribeNext({ (result) -> Void in
+                MQNetworkingTool.shareManager.loadUserInfo(accountInfo.uid!).subscribeNext({ (result) -> Void in
                     let dict = result as! [String: AnyObject]
                     printLog("加载用户信息 成功结果：result = \(result),dict = \(dict)")
                     accountInfo.name = dict["name"] as? String

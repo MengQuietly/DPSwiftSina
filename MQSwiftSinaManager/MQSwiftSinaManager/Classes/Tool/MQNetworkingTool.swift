@@ -46,7 +46,7 @@ class MQNetworkingTool: AFHTTPSessionManager {
     /// - see: [http://open.weibo.com/wiki/OAuth2/access_token](http://open.weibo.com/wiki/OAuth2/access_token)
     func loadAccessToken(code:String) -> RACSignal{
         let parameterDict = ["client_id":clientId,"client_secret":appSecret, "grant_type": "authorization_code","code":code,"redirect_uri":redirectUri]
-        return request(.POST, URLString: accessTokenURL, parameter: parameterDict)
+        return request(.POST, URLString: accessTokenURL, parameter: parameterDict,withToken: false)
     }
     
     /// 加载用户信息
@@ -55,20 +55,38 @@ class MQNetworkingTool: AFHTTPSessionManager {
     /// - parameter uid:   uid
     ///
     /// - returns: RACSignal
-    func loadUserInfo(token:String,uid:String) ->RACSignal{
-        let parameterDict = ["access_token":token,"uid":uid]
+    func loadUserInfo(uid:String) ->RACSignal{
+        let parameterDict = ["uid":uid]
         return request(.GET, URLString: usersShowURL, parameter: parameterDict)
     }
     
-    /// 网络请求方法
+    /// 网络请求方法(对 AFN 的 GET & POST 进行了封装)
     ///
     /// - parameter method:    method
     /// - parameter URLString: urlString
     /// - parameter parameter: 参数字典
+    /// - parameter withToken: 是否包含 accessToken，默认带 token 访问
     ///
     /// - returns: RAC Signal
-    func request(method:MQRequestMethod,URLString:String,parameter:[String:AnyObject]?)->RACSignal{
+    private func request(method:MQRequestMethod,URLString:String,var parameter:[String:AnyObject]?,withToken:Bool = true)->RACSignal{
         return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
+            
+            if withToken { // 判断是否需要 token（需要）
+                // 需要增加‘参数字典’中的token参数
+                // 判断 token 是否存在，‘guard’ 与 ‘if let’ 相反
+                guard let token = MQAccountViewModel.shareAccount.access_token else{
+                    // token == nil 情况
+                    // 发送一个 token ＝ nil 的错误
+                    subscriber.sendError(NSError(domain: "com.MQSwiftSinaManager.error", code: -1001, userInfo: ["errorMsg":"token 为空"]))
+                    return nil
+                }
+                // 后续的token 一定都是有值
+                // 判断是否传递了参数字典
+                if parameter == nil{
+                    parameter = [String:AnyObject]()
+                }
+                parameter!["access_token"] = token
+            }
             
             let successCallBack = { (task:NSURLSessionDataTask, result:AnyObject?) in
                 printLog("网络请求－ 成功回调结果：\(result)")
