@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
+		0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */; };
 		09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */; };
 		09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */; };
 		09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
+		0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountViewModel.swift; sourceTree = "<group>"; };
 		09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQBaseTableViewController.swift; sourceTree = "<group>"; };
 		09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQHomeController.swift; sourceTree = "<group>"; };
 		09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQMessageController.swift; sourceTree = "<group>"; };
@@ -100,11 +102,11 @@
 		09760A461CEEB19F00726AD1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				09760A4F1CEEB19F00726AD1 /* Tool */,
+				09760A511CEEB19F00726AD1 /* ViewModel(视图模型) */,
 				09760A471CEEB19F00726AD1 /* Model */,
 				09760A481CEEB19F00726AD1 /* Module(功能模块) */,
-				09760A4F1CEEB19F00726AD1 /* Tool */,
 				09760A501CEEB19F00726AD1 /* View */,
-				09760A511CEEB19F00726AD1 /* ViewModel */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -120,8 +122,8 @@
 		09760A481CEEB19F00726AD1 /* Module(功能模块) */ = {
 			isa = PBXGroup;
 			children = (
-				09760A4B1CEEB19F00726AD1 /* Main */,
 				09760A4D1CEEB19F00726AD1 /* OAuth */,
+				09760A4B1CEEB19F00726AD1 /* Main */,
 				09760A491CEEB19F00726AD1 /* Discover */,
 				09760A4A1CEEB19F00726AD1 /* Home */,
 				09760A4C1CEEB19F00726AD1 /* Message */,
@@ -198,10 +200,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		09760A511CEEB19F00726AD1 /* ViewModel */ = {
+		09760A511CEEB19F00726AD1 /* ViewModel(视图模型) */ = {
 			isa = PBXGroup;
 			children = (
+				0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */,
 			);
+			name = "ViewModel(视图模型)";
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
@@ -456,6 +460,7 @@
 			files = (
 				09E1A6F11CEEFC12009DF2B8 /* MQRequestURL.swift in Sources */,
 				09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */,
+				0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */,
 				09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */,
 				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,
 				09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */,

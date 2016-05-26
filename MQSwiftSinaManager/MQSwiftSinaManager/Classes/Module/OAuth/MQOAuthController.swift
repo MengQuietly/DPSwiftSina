@@ -88,42 +88,17 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
             printLog("请求码: + \(code)")
             
             // 4. 调用网络方法，获取 token
-            MQNetworkingTool.shareManager.loadAccessToken(code).subscribeNext({ (result) in
-                printLog("获取 accessToken 成功结果： \(result)")
-                let account = MQAccountInfo(dict: result as! [String : AnyObject])
-                printLog("返回对象：\(account)")
-                
-                self.loadAccessInfo(account)
-                
-                }, error: { (error) in
-                    printLog("获取 accessToken 失败结果： \(error)", logError: true)
+            MQAccountViewModel.shareAccount.loadUserAccount(code).subscribeError({ (error) in
+                printLog("获取Token并加载用户信息失败：\(error)")
+                }, completed: { 
+                    printLog("登录完成！")
             })
-            
         }else{
             printLog("取消", logError: true)
         }
         return false
     }
 
-    // MARK: - 网络加载
-    /// 加载用户信息
-    private func loadAccessInfo(accountInfo:MQAccountInfo){
-        MQNetworkingTool.shareManager.loadUserInfo(accountInfo.access_token!, uid: accountInfo.uid!).subscribeNext({ (result) in
-            let dict = result as! [String: AnyObject]
-            printLog("加载用户信息 成功结果：result = \(result),dict = \(dict)")
-            accountInfo.name = dict["name"] as? String
-            accountInfo.avatar_large = dict["avatar_large"] as? String
-            
-            printLog("accountInfo=\(accountInfo)")
-            // 保存帐号
-            accountInfo.saveUserAccount()
-            
-            }, error: { (error) in
-                printLog("加载用户信息 失败结果： \(error)", logError: true)
-        }) { () -> Void in
-            
-        }
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
