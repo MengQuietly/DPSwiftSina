@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        printLog("用户账户信息－打印方法:\(MQAccountInfo.loadUserAccount())")
+        printLog("用户账户信息－打印属性:\(MQAccountViewModel.shareAccount.userAccount)")
+        
+        // 设置网络
+        setupStatusBarForNetworking()
         // 设置外观
         setupAppearance()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -30,6 +37,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
         UITabBar.appearance().tintColor = UIColor.redColor()
     }
+    
+    /// 设置网络指示器
+    func setupStatusBarForNetworking(){
+        // 设置网络指示器，一旦设置，发起网络请求，会在状态栏显示菊花，指示器只负责 AFN 的网络请求，其他网络框架不负责
+        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
+        
+        // 设置缓存大小：NSURLCache 会把 GET 请求的数据做缓存
+        // 缓存的磁盘路径：/Library/Caches/(application bundle id)
+        // AFN 作者 MATTT，使用 苹果原生 缓存NSURLCache
+        // 内存缓存是 4M，磁盘缓存是 20M
+        // 提示：URLSession 只有 dataTask 会被缓存，downloadTask（一般文件大，存储在Temp随时删除）／uploadTask 不被缓存
+        // 扩展：1.终端 $ cd /Library/Caches/(application bundle id) 下，
+        //      2.$ sqlite3 Cache.db 得到4个文件
+        //      3. 文件 blob 表：保存接收到的图像，文件 receiver 表：保存接收到的二进制数据 JSON，文件 response 表：保存缓存响应
+        //      4.$ select * from receiver文件名; // 查看里面的内容
+        let cache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+        NSURLCache.setSharedURLCache(cache)
+    }
+
 
 
     func applicationWillResignActive(application: UIApplication) {

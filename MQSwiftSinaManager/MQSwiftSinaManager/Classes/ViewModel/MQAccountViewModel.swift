@@ -14,8 +14,12 @@ class MQAccountViewModel: NSObject {
     // 单例
     static let shareAccount = MQAccountViewModel()
     
+    // 当单例后的对象执行完成后就会执行 init 方法，初始化 AccountInfo 对象，为对象赋值
+    override init() {
+        userAccount = MQAccountInfo.loadUserAccount()
+    }
     // 用户账户
-    private var userAccount : MQAccountInfo?
+    var userAccount : MQAccountInfo?
     var access_token : String?{
         return userAccount?.access_token
     }
