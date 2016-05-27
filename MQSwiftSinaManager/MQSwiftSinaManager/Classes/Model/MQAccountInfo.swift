@@ -71,8 +71,17 @@ class MQAccountInfo: NSObject,NSCoding {
     ///
     /// - returns: 账户信息，若账户还没登录，返回 nil（所以 ‘?’）
     class func loadUserAccount() -> MQAccountInfo? {
+        // 解档加载用户账户时，需判断 token 有效期
         let account = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? MQAccountInfo
-        return account
+        
+        if let date = account?.expires_date {
+            /// 比较日期 date > 当前日期 NSDate() ，降序
+            if date.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                return account
+            }
+        }
+        
+        return nil
     }
     
     // MARK: - NSCoding 归档解档
