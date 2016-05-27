@@ -23,6 +23,11 @@ class MQAccountViewModel: NSObject {
     var access_token : String?{
         return userAccount?.access_token
     }
+    
+    /// 用户登录标记
+    var userLogon:Bool{
+        return access_token != nil
+    }
 
     func loadUserAccount(code:String) -> RACSignal {
         

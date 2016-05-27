@@ -11,7 +11,8 @@ import UIKit
 class MQBaseTableViewController: UITableViewController {
     
     // 用户登录标记
-    var userLoaon = false //MQAccountInfo.loadUserAccount()?.access_token != nil
+    var userLoaon = MQAccountViewModel.shareAccount.userLogon // 视图模型判断，好理解
+//    var userLoaon = MQAccountInfo.loadUserAccount()?.access_token != nil // 模型判断
 
     // 用户登录视图：每个控制器各自拥有自己的 visitorView
     // 提示：若使用懒加载，会在用户登录成功后，视图仍被创建，虽不影响执行，但会消耗内存
