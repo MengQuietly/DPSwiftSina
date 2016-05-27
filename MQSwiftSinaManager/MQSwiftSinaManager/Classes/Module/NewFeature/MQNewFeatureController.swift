@@ -90,7 +90,7 @@ class MQNewFeatureController: UICollectionViewController {
     }
 }
 
-/// 新特性 Cell，private 保证此 cell 只被当前控制器使用
+/// 新特性 Cell，private 保证此 cell 只被当前控制器使用,在当前文件中，所有的 private 都是摆设
 private class MQNewFeatureControllerCell: UICollectionViewCell{
     // frame 的大小来自于 layout 的 itemSize
     override init(frame: CGRect) {
@@ -108,6 +108,7 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
     private var iconIndex = 0 {
         didSet {
             iconView.image = UIImage(named: "new_feature_\(iconIndex + 1)")
+            pointView.currentPage = iconIndex
             startBtn.hidden = true
         }
     }
@@ -115,6 +116,17 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
     // MARK: - 懒加载属性：
     // 图像视图
     private lazy var iconView = UIImageView()
+    // 索引点
+    private lazy var pointView : UIPageControl = {
+        let pointViews = UIPageControl()
+        pointViews.hidesForSinglePage = true
+        pointViews.numberOfPages = MQNewFeatureImageCount
+        pointViews.currentPageIndicatorTintColor =  UIColor.orangeColor()
+        pointViews.pageIndicatorTintColor = UIColor.grayColor()
+        pointViews.backgroundColor = UIColor.clearColor()
+        return pointViews
+    }()
+    
     // 开始按钮
     private lazy var startBtn : UIButton = {
         let startBtns = UIButton()
@@ -122,15 +134,21 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
         startBtns.setBackgroundImage(UIImage(named:"new_feature_button"), forState: UIControlState.Normal)
         startBtns.setBackgroundImage(UIImage(named:"new_feature_button_highlighted"), forState: UIControlState.Highlighted)
         startBtns.sizeToFit()
+        startBtns.addTarget(self, action: #selector(startBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
         return startBtns
     }()
     
+    // 启动按钮点击事件：若类是 private 的，即使没有对方法进行修饰，运行循环同样无法调用监听方法，所以必须加 @Objc
+    @objc private func startBtnClick(){
+        printLog(#function)
+    }
     
     // 设置界面元素
     private func setUpUI(){
         // 添加控件
         addSubview(iconView)
         addSubview(startBtn)
+        addSubview(pointView)
         
         // 指定布局
         iconView.frame = bounds
@@ -139,6 +157,12 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
         startBtn.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: startBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: startBtn, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -80))
+        
+        // 索引点布局
+        pointView.frame.size = CGSizeMake(20 * CGFloat(MQNewFeatureImageCount), 20)
+        pointView.translatesAutoresizingMaskIntoConstraints = false;
+        addConstraint(NSLayoutConstraint(item: pointView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: pointView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -20))
     }
     
     // 动画显示启动按钮
@@ -152,6 +176,5 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
             }) { (_) in
                 
         }
-        
     }
 }
