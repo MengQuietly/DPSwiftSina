@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.redColor()
-        window?.rootViewController = MQTabBarController()
+        window?.rootViewController = MQNewFeatureController() //MQTabBarController()
         window?.makeKeyAndVisible()
         
         return true
