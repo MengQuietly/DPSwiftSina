@@ -33,7 +33,7 @@ class MQNewFeatureController: UICollectionViewController {
 
         // 注册可重用 cell
         // 注意：UITableViewCell.class 而这里是：UICollectionViewCell.self
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: MQNewFeatureCollectionViewCellID)
+        self.collectionView!.registerClass(MQNewFeatureControllerCell.self, forCellWithReuseIdentifier: MQNewFeatureCollectionViewCellID)
         
         prepareLayout()
     }
@@ -66,9 +66,9 @@ class MQNewFeatureController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MQNewFeatureCollectionViewCellID, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MQNewFeatureCollectionViewCellID, forIndexPath: indexPath) as! MQNewFeatureControllerCell
     
-        cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.redColor() : UIColor.greenColor()
+        cell.iconIndex = indexPath.item
     
         return cell
     }
@@ -104,4 +104,37 @@ class MQNewFeatureController: UICollectionViewController {
     }
     */
 
+}
+
+/// 新特性 Cell，private 保证此 cell 只被当前控制器使用
+private class MQNewFeatureControllerCell: UICollectionViewCell{
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setUpUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        setUpUI()
+    }
+    
+    var iconIndex = 0 {
+        didSet {
+            iconView.image = UIImage(named: "new_feature_\(iconIndex + 1)")
+        }
+    }
+    
+    // MARK: - 懒加载属性：图像视图
+    private lazy var iconView = UIImageView()
+    
+    // 设置界面元素
+    private func setUpUI(){
+        // 添加控件
+        addSubview(iconView)
+        
+        // 指定布局
+        iconView.frame = bounds
+    }
 }
