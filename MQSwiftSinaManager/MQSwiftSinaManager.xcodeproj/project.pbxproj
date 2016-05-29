@@ -25,6 +25,7 @@
 		09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */; };
 		09E1A6F11CEEFC12009DF2B8 /* MQRequestURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */; };
 		09E1A6F31CEF022F009DF2B8 /* MQCommonTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1A6F21CEF022F009DF2B8 /* MQCommonTools.swift */; };
+		09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F73AC31CF866DB003F857E /* MQWelomeController.swift */; };
 		49B583DDADAEC540101DBC77 /* Pods_MQSwiftSinaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNetworkingTool.swift; sourceTree = "<group>"; };
 		09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQRequestURL.swift; sourceTree = "<group>"; };
 		09E1A6F21CEF022F009DF2B8 /* MQCommonTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQCommonTools.swift; sourceTree = "<group>"; };
+		09F73AC31CF866DB003F857E /* MQWelomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQWelomeController.swift; sourceTree = "<group>"; };
 		5985A9386AE3E96E7CF49B85 /* Pods-MQSwiftSinaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.release.xcconfig"; sourceTree = "<group>"; };
 		9306FE4402166B92761A26A6 /* Pods_MQSwiftSinaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MQSwiftSinaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2DB3B0272F8E363DD919949 /* Pods-MQSwiftSinaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MQSwiftSinaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MQSwiftSinaManager/Pods-MQSwiftSinaManager.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */,
+				09F73AC31CF866DB003F857E /* MQWelomeController.swift */,
 			);
 			path = NewFeature;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */,
 				09E1A6EB1CEEF60F009DF2B8 /* MQVisitorLoginView.swift in Sources */,
 				09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */,
+				09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
