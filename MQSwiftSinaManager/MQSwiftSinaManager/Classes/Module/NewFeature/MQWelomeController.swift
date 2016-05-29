@@ -2,7 +2,7 @@
 //  MQWelomeController.swift
 //  MQSwiftSinaManager
 //
-//  Created by 文静 on 16/5/27.
+//  Created by mengmeng on 16/5/27.
 //  Copyright © 2016年 mengQuietly. All rights reserved.
 //
 
@@ -60,11 +60,24 @@ class MQWelomeController: UIViewController {
         view.addSubview(avatarIconView)
         view.addSubview(welomeLabel)
         
-        // 自动布局
+        // 自动布局(2种框架布局)
+        
+        // 2.使用 ffLayout框架布局
+        
+        backImgView.ff_Fill(view)
+        // 头像 img 约束
+        let avatarAlign = avatarIconView.ff_AlignInner(type: ff_AlignType.BottomCenter, referView: view, size: CGSize(width: 90, height: 90), offset: CGPoint(x: 0, y: -200))
+        self.iconBottomLayout = avatarIconView.ff_Constraint(avatarAlign, attribute: NSLayoutAttribute.Bottom)
+        // 欢迎回来label 约束
+        welomeLabel.ff_AlignVertical(type: ff_AlignType.BottomCenter, referView: avatarIconView, size: nil, offset: CGPoint(x: 0, y: 16))
+ 
+/*
+        // 1.使用原生 Layout 布局
+
         backImgView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[v]-0-|", options: [], metrics: nil, views: ["v":backImgView]))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[v]-0-|", options: [], metrics: nil, views: ["v":backImgView]))
-
+        
         // 头像 img 约束
         avatarIconView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
@@ -80,11 +93,13 @@ class MQWelomeController: UIViewController {
         // 约束头像宽高
         view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 90))
         view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 90))
-            
+        
         // 欢迎回来label 约束
         welomeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraint(NSLayoutConstraint(item: welomeLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: avatarIconView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: welomeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: avatarIconView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 16))
+ */
+        
     }
     
     // MARK: － 懒加载控件

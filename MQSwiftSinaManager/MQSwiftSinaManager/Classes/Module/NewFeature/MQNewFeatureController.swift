@@ -155,6 +155,17 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
         iconView.frame = bounds
         
         // 自动布局约束是添加在父视图上的
+        
+        /// 1. ffLayout 框架布局
+        // 索引点布局
+        pointView.ff_AlignVertical(type: ff_AlignType.BottomCenter, referView: self, size: CGSize(width:20 * CGFloat(MQNewFeatureImageCount),height: 20) , offset: CGPoint(x: 0, y: -40))
+        // 开始按钮布局
+        startBtn.ff_AlignInner(type: ff_AlignType.TopCenter, referView: pointView, size: nil, offset: CGPoint(x: 0, y: -60))
+        
+        
+/*
+        /// 2. 原生Layout 布局
+        // 开始按钮布局
         startBtn.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: startBtn, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: startBtn, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -80))
@@ -164,6 +175,8 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
         pointView.translatesAutoresizingMaskIntoConstraints = false;
         addConstraint(NSLayoutConstraint(item: pointView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: pointView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -20))
+ */
+        
     }
     
     // 动画显示启动按钮
