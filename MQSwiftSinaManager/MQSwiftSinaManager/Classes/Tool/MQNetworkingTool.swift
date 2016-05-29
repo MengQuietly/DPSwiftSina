@@ -100,7 +100,7 @@ class MQNetworkingTool: AFHTTPSessionManager {
             }
             
             let successCallBack = { (task:NSURLSessionDataTask, result:AnyObject?) in
-                printLog("网络请求－ 成功回调结果：\(result)")
+//                printLog("网络请求－ 成功回调结果：\(result)")
                 
                 /** 将结果发送给订阅者*/
                 subscriber.sendNext(result)
@@ -142,7 +142,7 @@ class MQNetworkingTool: AFHTTPSessionManager {
         return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
             
             let successCallBack = { (task:NSURLSessionDataTask, result:AnyObject?) in
-                printLog("网络请求－ 成功回调结果：\(result)")
+//                printLog("网络请求－ 成功回调结果：\(result)")
                 
                 let str = NSString(data: result as! NSData, encoding: NSUTF8StringEncoding)
                 printLog(str)

@@ -8,7 +8,11 @@
 
 import UIKit
 
+/// MVVM 中控制器／视图模型不能直接引用模型
 class MQHomeController: MQBaseTableViewController {
+    
+    /// 微博列表视图模型
+    private lazy var statusesListModel = MQStatusListModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,18 +21,12 @@ class MQHomeController: MQBaseTableViewController {
             visitorView?.setupInfo(nil, message: "关注一些人，回这里看看有惊喜")
             return
         }
-        loadWeiboContent()
+        loadWeiboList()
     }
     
     /// 加载微博数据
-    func loadWeiboContent() {
-        MQNetworkingTool.shareManager.loadAccountNewsWeiboContent().subscribeNext({ (result) in
-            printLog("加载微博数据成功结果：\(result)")
-            }, error: { (error) in
-                printLog("加载微博数据失败结果：\(error)", logError: true)
-            }) { 
-                printLog("加载微博数据完成")
-        }
+    func loadWeiboList() {
+        statusesListModel.loadStatuses()
     }
 
     override func didReceiveMemoryWarning() {
