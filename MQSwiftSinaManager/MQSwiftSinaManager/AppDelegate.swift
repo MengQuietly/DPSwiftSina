@@ -25,12 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.redColor()
-        window?.rootViewController = MQWelomeController() //MQNewFeatureController() //MQTabBarController()
+        window?.rootViewController = defaultViewController()
         window?.makeKeyAndVisible()
         
-        isNewVersion()
-        
         return true
+    }
+    
+    /// 启动默认根控制器
+    ///
+    /// - returns: 启动控制器
+    private func defaultViewController() -> UIViewController{
+        // 1. 判断用户是否登录
+        if MQAccountViewModel.shareAccount.userLogon {
+            // 2. 若已登录，判断是否是新版本
+            return isNewVersion() ? MQNewFeatureController() : MQWelomeController()
+        }
+        
+        // 3. 若没登录，返回Main
+        return MQTabBarController()
     }
     
     /// 检查是否是新版本
