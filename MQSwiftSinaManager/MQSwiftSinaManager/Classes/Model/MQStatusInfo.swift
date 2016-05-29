@@ -18,4 +18,19 @@ class MQStatusInfo: NSObject {
     var text: String?
     /// 微博来源
     var source: String?
+    
+    // MARK: - 构造函数
+    // NSArray & NSDictionary 在 swfit 中极少用，contentOfFile  加载 plist 才会用
+    init(dict:[String: AnyObject]) {
+        super.init()
+        
+        setValuesForKeysWithDictionary(dict)
+    }
+    
+    override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
+    
+    override var description: String{
+        let keys = ["created_at", "id", "text", "source"]
+        return dictionaryWithValuesForKeys(keys).description
+    }
 }

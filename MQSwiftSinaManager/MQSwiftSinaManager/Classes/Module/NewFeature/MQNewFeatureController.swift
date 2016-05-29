@@ -162,7 +162,6 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
         // 开始按钮布局
         startBtn.ff_AlignInner(type: ff_AlignType.TopCenter, referView: pointView, size: nil, offset: CGPoint(x: 0, y: -60))
         
-        
 /*
         /// 2. 原生Layout 布局
         // 开始按钮布局
