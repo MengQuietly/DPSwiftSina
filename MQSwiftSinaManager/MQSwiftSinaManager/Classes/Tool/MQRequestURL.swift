@@ -12,3 +12,5 @@ let oauthURL = "https://api.weibo.com/oauth2/authorize"
 let accessTokenURL = "https://api.weibo.com/oauth2/access_token"
 /// 根据用户ID获取用户信息
 let usersShowURL = "https://api.weibo.com/2/users/show.json"
+ /// 获取当前登录用户及其所关注（授权）用户的最新微博
+let readNewWeiBoURL = "https://api.weibo.com/2/statuses/home_timeline.json"

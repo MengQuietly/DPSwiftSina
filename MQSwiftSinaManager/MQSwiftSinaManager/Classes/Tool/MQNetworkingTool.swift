@@ -31,6 +31,16 @@ class MQNetworkingTool: AFHTTPSessionManager {
         return instance
     }()
     
+    // MARK: - 微博数据
+    /// 获取当前登录用户及其所关注（授权）用户的最新微博
+    ///
+    /// 使用一下 可在调用时直接点击链接进去查看
+    /// - see: [http://open.weibo.com/wiki/2/statuses/home_timeline](http://open.weibo.com/wiki/2/statuses/home_timeline)
+    /// @return <#return value description#>
+    func loadAccountNewsWeiboContent() -> RACSignal {
+        return request(.GET, URLString:readNewWeiBoURL , parameter: nil)
+    }
+    
     // MARK: - OAuth 授权 URL
     // 使用一下 可在调用时直接点击链接进去查看
     /// - see: [http://open.weibo.com/wiki/Oauth2/authorize](http://open.weibo.com/wiki/Oauth2/authorize)
@@ -39,16 +49,17 @@ class MQNetworkingTool: AFHTTPSessionManager {
         return NSURL(string: urlString)!
     }
     
+    // MARK: - 获取 AccessToken
     /// 获取 AccessToken
     ///
     /// - parameter code: 请求码/授权码
-    ///
     /// - see: [http://open.weibo.com/wiki/OAuth2/access_token](http://open.weibo.com/wiki/OAuth2/access_token)
     func loadAccessToken(code:String) -> RACSignal{
         let parameterDict = ["client_id":clientId,"client_secret":appSecret, "grant_type": "authorization_code","code":code,"redirect_uri":redirectUri]
         return request(.POST, URLString: accessTokenURL, parameter: parameterDict,withToken: false)
     }
     
+    // MARK: - 加载用户信息
     /// 加载用户信息
     ///
     /// - parameter token: token
