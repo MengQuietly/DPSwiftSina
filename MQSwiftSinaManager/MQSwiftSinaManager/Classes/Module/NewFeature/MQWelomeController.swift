@@ -45,7 +45,10 @@ class MQWelomeController: UIViewController {
                 UIView.animateWithDuration(0.8, animations: { 
                     self.welomeLabel.alpha = 1
                     }, completion: { (_) in
-                        
+                        // 提示：程序中尽量不要直接在其它位置更新根控制器，应交由 AppDelegate 完成更改
+//                        UIApplication.sharedApplication().keyWindow?.rootViewController = MQTabBarController()
+                        // 利用通知，通知 AppDelegate 更改根控制器
+                        NSNotificationCenter.defaultCenter().postNotificationName(MQSwitchRootViewControllerNotification, object: nil)
                 })
         }
     }

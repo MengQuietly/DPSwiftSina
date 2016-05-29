@@ -6,9 +6,14 @@
 //  Copyright © 2016年 mengQuietly. All rights reserved.
 //
 
-/// 常用工具
+/// 常用工具 - 类似 OC 中的 pch文件
 import Foundation
 
+// MARK: - 通知常量定义
+/// 切换根控制器通知
+let MQSwitchRootViewControllerNotification = "MQSwitchRootViewControllerNotification"
+
+// MARK: - 输出日志
 /// 输出日志
 /// 注意：
 /// 1.调用 printLog(msg) 时，需要配置 “build Setting 中 swift Compiler－Custom flags 的 Other Swift flags 项，添加 ‘-D DEBUG’“ 后才会打印信息

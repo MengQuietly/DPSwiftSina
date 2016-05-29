@@ -141,6 +141,7 @@ private class MQNewFeatureControllerCell: UICollectionViewCell{
     // 启动按钮点击事件：若类是 private 的，即使没有对方法进行修饰，运行循环同样无法调用监听方法，所以必须加 @Objc
     @objc private func startBtnClick(){
         printLog(#function)
+        NSNotificationCenter.defaultCenter().postNotificationName(MQSwitchRootViewControllerNotification, object: nil)
     }
     
     // 设置界面元素

@@ -92,6 +92,14 @@ class MQOAuthController: UIViewController,UIWebViewDelegate {
                 printLog("获取Token并加载用户信息失败：\(error)")
                 }, completed: { 
                     printLog("登录完成！")
+                    
+                    // 关闭控制器
+                    SVProgressHUD.dismiss()
+                    // 动画完成后，再切换根控制器操作能保证视图控制器被完全销毁
+                    self.dismissViewControllerAnimated(false, completion: {
+                        // 通知是同步的，动画完成后再发通知
+                        NSNotificationCenter.defaultCenter().postNotificationName(MQSwitchRootViewControllerNotification, object: "OAuth")
+                    })
             })
         }else{
             printLog("取消", logError: true)

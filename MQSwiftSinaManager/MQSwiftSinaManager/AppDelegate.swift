@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         printLog("用户账户信息－打印方法:\(MQAccountInfo.loadUserAccount())")
         printLog("用户账户信息－打印属性:\(MQAccountViewModel.shareAccount.userAccount)")
         
+        // 注册通知
+        // object：监听由哪个对象发出的通知，若为 nil 表接收所有对象发送的 ‘name’通知
+        let selectors = #selector(AppDelegate.switchRootViewControllerNotification)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: selectors, name: MQSwitchRootViewControllerNotification, object: nil)
         // 设置网络
         setupStatusBarForNetworking()
         // 设置外观
@@ -29,6 +33,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    /// 切换根控制器的通知监听方法
+    @objc private func switchRootViewControllerNotification(notification:NSNotification){
+        printLog("切换根控制器的通知：\(notification)")
+        
+        // 提示：在发布通知时：
+        // 若只是传递消息，post name
+        // 若传递消息同时，希望传递一个数值，可通过 ‘object’ 来传递数值
+        // 若传递消息同时，希望传递更多内容，可通过 ‘userInfo’ 字典来传递
+        window?.rootViewController = (notification.object == nil) ? MQTabBarController() : MQWelomeController()
+    }
+    
+    /// 注销通知
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: MQSwitchRootViewControllerNotification, object: nil)
     }
     
     /// 启动默认根控制器
