@@ -31,9 +31,9 @@ class MQAccountInfo: NSObject,NSCoding {
     
     /// 授权用户的UID，本字段只是为了方便开发者，减少一次user/show接口调用而返回的，第三方应用不能用此字段作为用户登录状态的识别，只有access_token才是用户授权的唯一票据。
     var uid :String?
-    
+    /// 昵称
     var name :String?
-    
+    /// 用户头像地址（大图）：180*180
     var avatar_large :String?
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 /// 欢迎界面
 class MQWelomeController: UIViewController {
@@ -18,6 +19,8 @@ class MQWelomeController: UIViewController {
         super.viewDidLoad()
 
         setUpUI()
+        // 设置网络头像
+        avatarIconView.sd_setImageWithURL(MQAccountViewModel.shareAccount.avatarUrl, placeholderImage: UIImage(named: "avatar_default_big"))
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,6 +62,7 @@ class MQWelomeController: UIViewController {
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[v]-0-|", options: [], metrics: nil, views: ["v":backImgView]))
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[v]-0-|", options: [], metrics: nil, views: ["v":backImgView]))
 
+        // 头像 img 约束
         avatarIconView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         // 记录头像垂直方向约束
@@ -69,7 +73,12 @@ class MQWelomeController: UIViewController {
         // 第二种写法：将新建的约束添加到视图的约束数组中
         view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -200))
         self.iconBottomLayout = view.constraints.last
-
+        
+        // 约束头像宽高
+        view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 90))
+        view.addConstraint(NSLayoutConstraint(item: avatarIconView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 90))
+            
+        // 欢迎回来label 约束
         welomeLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraint(NSLayoutConstraint(item: welomeLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: avatarIconView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: welomeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: avatarIconView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 16))
@@ -84,7 +93,6 @@ class MQWelomeController: UIViewController {
         let avatarIcon = UIImageView(image: UIImage(named: "avatar_default_big"))
         avatarIcon.layer.cornerRadius = avatarIcon.frame.width * 0.5
         avatarIcon.layer.masksToBounds = true
-        
         return avatarIcon
         
     }()

@@ -28,7 +28,12 @@ class MQAccountViewModel: NSObject {
     var userLogon:Bool{
         return access_token != nil
     }
-
+    
+    /// 头像地址
+    var avatarUrl:NSURL?{
+        return NSURL(string: userAccount?.avatar_large ?? "")
+    }
+    
     func loadUserAccount(code:String) -> RACSignal {
         
         return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
