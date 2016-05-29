@@ -28,7 +28,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = MQWelomeController() //MQNewFeatureController() //MQTabBarController()
         window?.makeKeyAndVisible()
         
+        isNewVersion()
+        
         return true
+    }
+    
+    /// 检查是否是新版本
+    ///
+    /// - returns: true／false
+    private func isNewVersion() -> Bool{
+    
+        // 1.获取当前版本号
+        let currentVersions = Double(NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String)!
+        
+        printLog("当前版本号：\(currentVersions)")
+        // 2.获取之前版本号（若没有，返回0）
+        let versionKey = "com.MQSwfitSinaManager.cn.version"
+        let beforeVersions = NSUserDefaults.standardUserDefaults().doubleForKey(versionKey)
+        printLog("之前版本号：\(beforeVersions)")
+        // 3.保存当前版本号
+        NSUserDefaults.standardUserDefaults().setDouble(currentVersions, forKey: versionKey)
+        // 4.比较版本号，返回结果
+        return currentVersions > beforeVersions
     }
     
     /// 修改 navBar、tabBar 字体颜色
