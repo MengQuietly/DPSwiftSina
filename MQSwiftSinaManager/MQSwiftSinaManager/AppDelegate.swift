@@ -48,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// 注销通知
     deinit{
+        // 注销指定名称的通知，在程序被销毁时，才会被调用，可省略
         NSNotificationCenter.defaultCenter().removeObserver(self, name: MQSwitchRootViewControllerNotification, object: nil)
     }
     
