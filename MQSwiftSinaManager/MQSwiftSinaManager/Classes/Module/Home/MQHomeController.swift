@@ -27,7 +27,7 @@ class MQHomeController: MQBaseTableViewController {
         }
         // 注册重用 cell
         tableView.registerClass(MQStatusCell.self, forCellReuseIdentifier: MQHomeCellID)
-        tableView.rowHeight = 100
+        tableView.rowHeight = 200
         // 取消分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         

@@ -21,6 +21,7 @@ class MQStatusCell: UITableViewCell {
         didSet{
             // 模型数值被设置之后，马上要产生的连锁反应 - 界面UI发生变化
             cellWithTopView.statusViewModel = statusViewModel
+            contentLabel.text = statusViewModel?.statusInfo.text
         }
     }
     
@@ -38,9 +39,11 @@ class MQStatusCell: UITableViewCell {
     private func setUpUI(){
         // 1.添加控件
         contentView.addSubview(cellWithTopView)
+        contentView.addSubview(contentLabel)
         
         // 2.自动布局
         cellWithTopView.ff_AlignInner(type: ff_AlignType.TopRight, referView: contentView, size: CGSize(width: MQAppWith, height: 50))
+        contentLabel.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: cellWithTopView, size: nil, offset: CGPoint(x: MQStatusCellMargin, y: MQStatusCellMargin))
     }
     
     // MARK: - 懒加载
