@@ -9,7 +9,9 @@
 import UIKit
 
 /// 控件间的间距
-private let MQStatusCellMargin: CGFloat = 12
+let MQStatusCellMargin: CGFloat = 12
+/// 头像大小
+let MQStatusAvatarWidth: CGFloat = 35
 
 /// 微博Cell
 class MQStatusCell: UITableViewCell {
@@ -34,10 +36,10 @@ class MQStatusCell: UITableViewCell {
     }
     
     private func setUpUI(){
-        // 添加控件
+        // 1.添加控件
         contentView.addSubview(cellWithTopView)
         
-        // 自动布局
+        // 2.自动布局
         cellWithTopView.ff_AlignInner(type: ff_AlignType.TopRight, referView: contentView, size: CGSize(width: MQAppWith, height: 50))
     }
     
