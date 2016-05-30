@@ -26,7 +26,10 @@ class MQHomeController: MQBaseTableViewController {
             return
         }
         // 注册重用 cell
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: MQHomeCellID)
+        tableView.registerClass(MQStatusCell.self, forCellReuseIdentifier: MQHomeCellID)
+        tableView.rowHeight = 100
+        // 取消分割线
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         loadWeiboList()
     }
@@ -34,14 +37,6 @@ class MQHomeController: MQBaseTableViewController {
     /// 加载微博数据
     func loadWeiboList() {
         
-//        statusesListModel.loadStatuses().subscribeNext({ (error) -> Void in
-//            printLog(error)
-//            SVProgressHUD.showInfoWithStatus("您的网络不给力")
-//            
-//        }) { () -> Void in
-//            // 刷新表格
-//            self.tableView.reloadData()
-//        }
         statusesListModel.loadStatuses().subscribeNext({ (error) in
             printLog("首页加载微博数据失败", logError: true)
             SVProgressHUD.showInfoWithStatus("您的网络不给力！")
@@ -69,12 +64,14 @@ extension MQHomeController{
         /// 如果缓冲区 cell 不存在，会使用原型 cell 实例化一个新的 cell
         /// 2. dequeueReusableCellWithIdentifier，会查询可重用cell，如果注册原型cell，能够查询到，否则，返回 nil
         /// 需要后续判断 if (cell == nil) ，是在 iOS 5.0 开发使用的
-        let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID, forIndexPath: indexPath) as! MQStatusCell
         
         // 1. 获取微博数据
-        let statusInfos = statusesListModel.statusList![indexPath.item] as! MQStatusInfo
+        let statusInfos = statusesListModel.statusList![indexPath.item] as! MQStatusViewModel
+        
         // 2. 设置数据
-        cell.textLabel?.text = statusInfos.text
+        cell.statusViewModel = statusInfos
+        
         // 3. 返回 cell
         return cell
     }

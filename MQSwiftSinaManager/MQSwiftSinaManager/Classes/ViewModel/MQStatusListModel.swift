@@ -34,11 +34,11 @@ class MQStatusListModel: NSObject {
                 // 2.字典转模型
                 // 创建数组
                 if self.statusList == nil {
-                    self.statusList = [MQStatusInfo]()
+                    self.statusList = [MQStatusViewModel]()
                 }
                 // 遍历数组，字典转模型
                 for dict in statusArray{
-                    self.statusList?.append(MQStatusInfo(dict: dict))
+                    self.statusList?.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
                 }
                 printLog("字典转模型后数组：\(self.statusList)")
                 

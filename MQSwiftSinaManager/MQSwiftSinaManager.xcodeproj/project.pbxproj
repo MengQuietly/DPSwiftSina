@@ -12,6 +12,7 @@
 		090DA5BD1CFBDE380009903A /* MQStatusCellWithTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5BC1CFBDE380009903A /* MQStatusCellWithTopView.swift */; };
 		090DA5BF1CFBDE510009903A /* MQStatusCellWithBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5BE1CFBDE510009903A /* MQStatusCellWithBottomView.swift */; };
 		090DA5C11CFBE90E0009903A /* MQUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5C01CFBE90E0009903A /* MQUserInfo.swift */; };
+		090DA5C31CFC18D50009903A /* MQStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5C21CFC18D50009903A /* MQStatusViewModel.swift */; };
 		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
 		0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */; };
 		0938DABD1CF7ECCB00E3A8CD /* MQNewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */; };
@@ -60,6 +61,7 @@
 		090DA5BC1CFBDE380009903A /* MQStatusCellWithTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusCellWithTopView.swift; sourceTree = "<group>"; };
 		090DA5BE1CFBDE510009903A /* MQStatusCellWithBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusCellWithBottomView.swift; sourceTree = "<group>"; };
 		090DA5C01CFBE90E0009903A /* MQUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQUserInfo.swift; sourceTree = "<group>"; };
+		090DA5C21CFC18D50009903A /* MQStatusViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusViewModel.swift; sourceTree = "<group>"; };
 		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
 		0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountViewModel.swift; sourceTree = "<group>"; };
 		0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNewFeatureController.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */,
 				09F73AC71CFAD7E0003F857E /* MQStatusListModel.swift */,
+				090DA5C21CFC18D50009903A /* MQStatusViewModel.swift */,
 			);
 			name = "ViewModel(视图模型)";
 			path = ViewModel;
@@ -536,6 +539,7 @@
 				09F73AC81CFAD7E0003F857E /* MQStatusListModel.swift in Sources */,
 				09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,
+				090DA5C31CFC18D50009903A /* MQStatusViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
