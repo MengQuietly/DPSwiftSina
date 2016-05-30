@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090DA5B91CFBDB810009903A /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5B81CFBDB810009903A /* UILabel+Extensions.swift */; };
+		090DA5BB1CFBDCC40009903A /* MQStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5BA1CFBDCC40009903A /* MQStatusCell.swift */; };
+		090DA5BD1CFBDE380009903A /* MQStatusCellWithTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5BC1CFBDE380009903A /* MQStatusCellWithTopView.swift */; };
+		090DA5BF1CFBDE510009903A /* MQStatusCellWithBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090DA5BE1CFBDE510009903A /* MQStatusCellWithBottomView.swift */; };
 		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
 		0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */; };
 		0938DABD1CF7ECCB00E3A8CD /* MQNewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */; };
@@ -50,6 +54,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		090DA5B81CFBDB810009903A /* UILabel+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		090DA5BA1CFBDCC40009903A /* MQStatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusCell.swift; sourceTree = "<group>"; };
+		090DA5BC1CFBDE380009903A /* MQStatusCellWithTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusCellWithTopView.swift; sourceTree = "<group>"; };
+		090DA5BE1CFBDE510009903A /* MQStatusCellWithBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusCellWithBottomView.swift; sourceTree = "<group>"; };
 		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
 		0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountViewModel.swift; sourceTree = "<group>"; };
 		0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNewFeatureController.swift; sourceTree = "<group>"; };
@@ -109,6 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090DA5B61CFBDB100009903A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				090DA5B81CFBDB810009903A /* UILabel+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		090DA5B71CFBDB470009903A /* HomeCell */ = {
+			isa = PBXGroup;
+			children = (
+				090DA5BA1CFBDCC40009903A /* MQStatusCell.swift */,
+				090DA5BC1CFBDE380009903A /* MQStatusCellWithTopView.swift */,
+				090DA5BE1CFBDE510009903A /* MQStatusCellWithBottomView.swift */,
+			);
+			path = HomeCell;
+			sourceTree = "<group>";
+		};
 		0938DABB1CF7ECA100E3A8CD /* NewFeature */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +191,7 @@
 		09760A4A1CEEB19F00726AD1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				090DA5B71CFBDB470009903A /* HomeCell */,
 				09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */,
 			);
 			path = Home;
@@ -207,6 +234,7 @@
 		09760A4F1CEEB19F00726AD1 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				090DA5B61CFBDB100009903A /* Extensions */,
 				09E1A6EE1CEEFA9D009DF2B8 /* MQNetworkingTool.swift */,
 				09E1A6F01CEEFC11009DF2B8 /* MQRequestURL.swift */,
 				09E1A6F21CEF022F009DF2B8 /* MQCommonTools.swift */,
@@ -489,14 +517,18 @@
 				09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */,
 				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,
 				09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */,
+				090DA5BD1CFBDE380009903A /* MQStatusCellWithTopView.swift in Sources */,
 				09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */,
 				0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */,
 				09E1A6F31CEF022F009DF2B8 /* MQCommonTools.swift in Sources */,
+				090DA5BF1CFBDE510009903A /* MQStatusCellWithBottomView.swift in Sources */,
 				09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */,
 				09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */,
 				09F73ACA1CFAE995003F857E /* UIView+AutoLayout.swift in Sources */,
 				09E1A6EB1CEEF60F009DF2B8 /* MQVisitorLoginView.swift in Sources */,
+				090DA5BB1CFBDCC40009903A /* MQStatusCell.swift in Sources */,
 				09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */,
+				090DA5B91CFBDB810009903A /* UILabel+Extensions.swift in Sources */,
 				09F73AC81CFAD7E0003F857E /* MQStatusListModel.swift in Sources */,
 				09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,

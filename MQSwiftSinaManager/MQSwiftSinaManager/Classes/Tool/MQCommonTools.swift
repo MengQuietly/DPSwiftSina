@@ -8,10 +8,18 @@
 
 /// 常用工具 - 类似 OC 中的 pch文件
 import Foundation
+import UIKit
 
 // MARK: - 通知常量定义
 /// 切换根控制器通知
 let MQSwitchRootViewControllerNotification = "MQSwitchRootViewControllerNotification"
+
+// MARK: - 屏幕宽高常量定义
+/// 屏幕宽
+let MQAppWith = UIScreen.mainScreen().bounds.width
+/// 屏幕高
+let MQAppHeight = UIScreen.mainScreen().bounds.height
+
 
 // MARK: - 输出日志
 /// 输出日志

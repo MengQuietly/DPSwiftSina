@@ -18,7 +18,6 @@ class MQStatusListModel: NSObject {
     func loadStatuses() -> RACSignal {
         
         return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
-            
             MQNetworkingTool.shareManager.loadAccountNewsWeiboContent().subscribeNext({ (result) in
                 
                 let datas = result as! NSDictionary

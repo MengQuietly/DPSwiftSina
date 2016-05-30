@@ -116,12 +116,17 @@ class MQWelomeController: UIViewController {
     }()
     
     // 欢迎回来
-    private lazy var welomeLabel: UILabel = {
-        let welomeLabels = UILabel()
-        welomeLabels.text = "欢迎回来"
-        welomeLabels.textColor = UIColor.grayColor()
-        return welomeLabels
-    }()
+    
+    // 使用 UILabel 分类实现
+    private lazy var welomeLabel: UILabel = UILabel(title: "欢迎回来", color: UIColor.darkGrayColor(), fontSize: 18)
+    
+//    // 使用 原生 实现
+//    private lazy var welomeLabel: UILabel = {
+//        let welomeLabels = UILabel()
+//        welomeLabels.text = "欢迎回来"
+//        welomeLabels.textColor = UIColor.grayColor()
+//        return welomeLabels
+//    }()
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
