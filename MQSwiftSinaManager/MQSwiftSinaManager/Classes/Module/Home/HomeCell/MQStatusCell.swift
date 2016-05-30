@@ -40,10 +40,12 @@ class MQStatusCell: UITableViewCell {
         // 1.添加控件
         contentView.addSubview(cellWithTopView)
         contentView.addSubview(contentLabel)
+        contentView.addSubview(cellWithBottomView)
         
         // 2.自动布局
         cellWithTopView.ff_AlignInner(type: ff_AlignType.TopRight, referView: contentView, size: CGSize(width: MQAppWith, height: 50))
         contentLabel.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: cellWithTopView, size: nil, offset: CGPoint(x: MQStatusCellMargin, y: MQStatusCellMargin))
+        cellWithBottomView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: contentLabel, size: CGSize(width: MQAppWith,height: 44), offset: CGPoint(x: -MQStatusCellMargin, y: MQStatusCellMargin))
     }
     
     // MARK: - 懒加载
