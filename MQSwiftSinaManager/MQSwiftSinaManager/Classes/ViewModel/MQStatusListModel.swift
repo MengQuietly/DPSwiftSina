@@ -44,9 +44,10 @@ class MQStatusListModel: NSObject {
                 printLog("字典转模型后数组：\(self.statusList)")
                 
                 // 3.通知调用方
-                
+                subscriber.sendCompleted()
                 }, error: { (error) in
                     printLog("加载微博数据失败结果：\(error)", logError: true)
+                    subscriber.sendError(error)
             }) {}
             
             return nil
