@@ -27,7 +27,10 @@ class MQHomeController: MQBaseTableViewController {
         }
         // 注册重用 cell
         tableView.registerClass(MQStatusCell.self, forCellReuseIdentifier: MQHomeCellID)
-        tableView.rowHeight = 200
+        // 以下两句就可以自动处理行高，条件：
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // 取消分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
