@@ -75,6 +75,7 @@ extension MQHomeController{
         /// 如果缓冲区 cell 不存在，会使用原型 cell 实例化一个新的 cell
         /// 2. dequeueReusableCellWithIdentifier，会查询可重用cell，如果注册原型cell，能够查询到，否则，返回 nil
         /// 需要后续判断 if (cell == nil) ，是在 iOS 5.0 开发使用的
+        /// 获得可重用cell的同时要获得行高
         let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID, forIndexPath: indexPath) as! MQStatusCell
         
         // 1. 获取微博数据
@@ -87,12 +88,20 @@ extension MQHomeController{
         return cell
     }
     
+    /// 默认情况下，会计算所有行的行高（因为 UITableView 继承自 UIScrollView，UIScrollerView 的滚动依赖于 contentSize，而 要把所有行高斗计算出来，才能准确知道 contentSize）
+    /// 若设置了预估行高（estimatedRowHeight），会根据预估行高，来计算需要显示行的尺寸！
+    /// 注意：
+    /// 1) 没设置 预估行高，执行顺序为：numberOfRowsInSection（多次）－cellForRowAtIndexPath－heightForRowAtIndexPath（多次）－cellForRowAtIndexPath；
+    /// 2) 设置了 预估行高，执行顺序为：numberOfRowsInSection（多次）－heightForRowAtIndexPath（多次）－cellForRowAtIndexPath；
+    /// 提示：若行高是固定的，千万不要实现此代理！行高的代理方法，在每个版本的 Xcode 和 iOS 模拟器上执行频率都不一样
+    /// 苹果在底层一直在做优化
+    /// 需行高的缓存！‘只计算一次！ 有一个地方能记录当前的行高！’
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         // 0. 获得模型
         let viewModel = statusesListModel.statusList[indexPath.row] as! MQStatusViewModel
         
-        // 1. 获得 cell(注意：不能使用 带 dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) 方法，否则会死循环)
+        // 1. 获得 cell(注意：不能使用 带 dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) 方法，否则会死循环［因为调用indexpath 代理时，会调用 heightForRowAtIndexPath 此代理方法］)
         let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID) as! MQStatusCell
         
         // 2. 返回行高
