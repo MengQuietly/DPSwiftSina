@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// 可重用标识符
+private let MQStatusPictureViewCellID = "MQStatusPictureViewCellID"
+
 /// 微博图片视图
 class MQStatusPictureView: UICollectionView {
     
@@ -15,6 +18,9 @@ class MQStatusPictureView: UICollectionView {
     var statusViewModel: MQStatusViewModel? {
         didSet{
             sizeToFit()
+            
+            // 刷新数据
+            reloadData()
         }
     }
     
@@ -78,12 +84,63 @@ class MQStatusPictureView: UICollectionView {
         
         backgroundColor = UIColor.redColor()
         
+        // 设置布局的间距
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = MQStatusPictureItemMargin
         layout.minimumLineSpacing = MQStatusPictureItemMargin
+        
+        // 指定数据源 － 让自己当自己的数据源
+        // 1. 在自定义 view 中，代码逻辑相对简单，可以考虑自己充当自己的数据源
+        // 2. dataSource & delegate 本身都是弱引用，自己充当自己的代理不会产生循环引用
+        // 3. 除了配图视图，自定义 pickerView(省市联动的)
+        dataSource = self
+        // 注册可重用 cell
+        registerClass(MQStatusPictureViewCell.self, forCellWithReuseIdentifier: MQStatusPictureViewCellID)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension MQStatusPictureView: UICollectionViewDataSource{
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return statusViewModel?.thumbnailURLs?.count ?? 0
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MQStatusPictureViewCellID, forIndexPath: indexPath) as! MQStatusPictureViewCell
+        cell.iconImgUrl = statusViewModel?.thumbnailURLs![indexPath.item]
+        
+        return cell
+    }
+}
+
+/// 配图视图的 Cell
+private class MQStatusPictureViewCell : UICollectionViewCell{
+    
+    /// 配图视图的 URL
+    var iconImgUrl: NSURL?{
+        didSet {
+            iconView.sd_setImageWithURL(iconImgUrl)
+        }
+    }
+    
+    // MARK: - 构造函数
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        // 添加控件
+        addSubview(iconView)
+        // 自动布局
+        iconView.ff_Fill(self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - 懒加载
+    private let iconView: UIImageView = UIImageView()
 }
