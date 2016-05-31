@@ -13,11 +13,15 @@ import ReactiveCocoa
 class MQStatusListModel: NSObject {
     
     // 微博数据数组 － AnyObject 原因不详
-    var statusList:[AnyObject]?
+    var statusList:[AnyObject] = [MQStatusViewModel]()
     // 加载微博数据
     func loadStatuses() -> RACSignal {
         
-        return RACSignal.createSignal({ (subscriber) -> RACDisposable! in
+        // RACSignal 在订阅的时候，会对 self 进行强引用，sendCompleted 说明信号完成，会释放对 self 的强引用
+        // 以下代码不存在循环引用，但是为了保险，可以使用 [weak self] 防范！
+        return RACSignal.createSignal({ [weak self](subscriber) -> RACDisposable! in
+            
+            // 网络工具，执行的时候，会对 self 进行强引用，网络访问结束后，后对 self 的引用释放！
             MQNetworkingTool.shareManager.loadAccountNewsWeiboContent().subscribeNext({ (result) in
                 
                 let datas = result as! NSDictionary
@@ -32,15 +36,12 @@ class MQStatusListModel: NSObject {
                 printLog("加载微博数据模型转化成果：\(statusArray)")
                 
                 // 2.字典转模型
-                // 创建数组
-                if self.statusList == nil {
-                    self.statusList = [MQStatusViewModel]()
-                }
+            
                 // 遍历数组，字典转模型
                 for dict in statusArray{
-                    self.statusList?.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
+                    self?.statusList.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
                 }
-                printLog("字典转模型后数组：\(self.statusList)")
+                printLog("字典转模型后数组：\(self?.statusList)")
                 
                 // 3.通知调用方
                 subscriber.sendCompleted()

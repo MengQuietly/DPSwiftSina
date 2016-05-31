@@ -57,7 +57,7 @@ class MQHomeController: MQBaseTableViewController {
 // 类似于 OC 的分类，同时可以将遵守的协议方法，分离出来
 extension MQHomeController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statusesListModel.statusList?.count ?? 0
+        return statusesListModel.statusList.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -70,7 +70,7 @@ extension MQHomeController{
         let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID, forIndexPath: indexPath) as! MQStatusCell
         
         // 1. 获取微博数据
-        let statusInfos = statusesListModel.statusList![indexPath.item] as! MQStatusViewModel
+        let statusInfos = statusesListModel.statusList[indexPath.item] as! MQStatusViewModel
         
         // 2. 设置数据
         cell.statusViewModel = statusInfos
