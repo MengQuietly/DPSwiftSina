@@ -29,6 +29,8 @@ class MQStatusCell: UITableViewCell {
     var pictureViewWidthLayout: NSLayoutConstraint?
     /// picture高度约束
     var pictureViewHeightLayout: NSLayoutConstraint?
+    /// picture顶部约束（无 picture 时 ，bottomview 会距离 文本 2个 marger）
+    var pictureViewTopLayout: NSLayoutConstraint?
     
     /// 微博数据视图模型
     var statusViewModel: MQStatusViewModel? {
@@ -42,6 +44,8 @@ class MQStatusCell: UITableViewCell {
             // 设置配图视图的大小
             pictureViewWidthLayout?.constant = pictureView.bounds.width
             pictureViewHeightLayout?.constant = pictureView.bounds.height
+            // 根据是否包含图片，决定 pictureView 顶部约束
+            pictureViewTopLayout?.constant = statusViewModel?.thumbnailURLs?.count == 0 ? 0 : MQStatusCellMargin
             
             /* 测试视图行高
             // 提示：在自动布局系统中，随机修改表格约束，使用自动计算行高很容易出问题(需去除 tableView.rowHeight = UITableViewAutomaticDimension)！
@@ -104,6 +108,7 @@ class MQStatusCell: UITableViewCell {
         // 记录配图视图约束
         pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
         pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
+        pictureViewTopLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Top)
         
         // 5> 底部视图
         cellWithBottomView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: pictureView, size: CGSize(width: MQAppWith,height: 44), offset: CGPoint(x: -MQStatusCellMargin, y: MQStatusCellMargin))

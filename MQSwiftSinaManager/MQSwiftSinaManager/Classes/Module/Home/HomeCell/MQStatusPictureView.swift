@@ -63,12 +63,7 @@ class MQStatusPictureView: UICollectionView {
             return CGSize(width: w, height: w)
         }
         
-        // 4> 其他
-        /**
-         2, 3,
-         5, 6,
-         7, 8, 9
-         */
+        // 4> 其他 2, 3, 5, 6, 7, 8, 9
         // 计算显示图片的行数
         let pictureRow = CGFloat((pictureCount - 1) / Int(MQStatusPictureRowMaxCount) + 1)
         let pictureH = (MQStatusPictureItemWith + MQStatusPictureItemMargin) * pictureRow - MQStatusPictureItemMargin
