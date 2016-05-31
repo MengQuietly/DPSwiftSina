@@ -12,6 +12,12 @@ import SVProgressHUD
 /// HomeCell 重用标识符
 private let MQHomeCellID = "MQHomeCellID"
 
+// MARK: - 关于表格自动计算行高问题
+// 注意：在实际开发中，自动布局约束通常是加多了，一旦po 错，可尝试阅读错误输出，删除一些不必要的约束，就能解决！
+// 1.不要使用自动计算行高（tableView.rowHeight = UITableViewAutomaticDimension）
+// 2.不要使用底部约束（MQStatusCell 中 cellWithBottomView.ff_AlignInner）
+// 3.需要考虑缓存
+
 /// MVVM 中控制器／视图模型不能直接引用模型
 class MQHomeController: MQBaseTableViewController {
     
@@ -28,8 +34,10 @@ class MQHomeController: MQBaseTableViewController {
         // 注册重用 cell
         tableView.registerClass(MQStatusCell.self, forCellReuseIdentifier: MQHomeCellID)
         // 以下两句就可以自动处理行高，条件：
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableViewAutomaticDimension
+        // 提示：如果不使用自动计算行高，UITableViewAutomaticDimension，一定不要设置底部约束（需去除 statusBottomView 约束）
+//        tableView.estimatedRowHeight = 200
+//        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = 300
         
         // 取消分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
