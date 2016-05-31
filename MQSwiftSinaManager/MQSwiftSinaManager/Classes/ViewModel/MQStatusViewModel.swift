@@ -19,6 +19,9 @@ class MQStatusViewModel: NSObject {
         return NSURL(string: statusInfo.user!.profile_image_url ?? "")
     }
     
+    /// 配图缩略图 URL 数组
+    var thumbnailURLs: [NSURL]?
+    
     /// 认证类型 -1：没有认证，0，认证用户，2,3,5: 企业认证，220: 达人
     /// imageWithNamed 方法能够缓存图像，所以两个计算型属性的效率不会受到影响
     /// 设置计算型属性的时候，需要考虑到性能
@@ -46,6 +49,26 @@ class MQStatusViewModel: NSObject {
     // MARK: - 构造函数
     init(statusInfos: MQStatusInfo) {
         self.statusInfo = statusInfos
+        
+        // 给缩略图数组设置数值
+        // 判断是否有图像
+        if statusInfos.pic_urls != nil {
+            thumbnailURLs = [NSURL]()
+            
+            // 遍历数组，插入 URL
+            for dict in statusInfos.pic_urls! {
+                // 第一个 `!` 确保字典中 thumbnail_pic `key` 一定存在
+                // 第二个 `!` 确保后台返回 URL字符串 一定能创建出 URL，通常由后台返回的URL是添加过百分号转义的！
+                thumbnailURLs?.append(NSURL(string: dict["thumbnail_pic"]!)!)
+            }
+        }
+        
         super.init()
+    }
+    
+    override var description: String {
+//        let keys = ["thumbnailURLs"]
+//        return dictionaryWithValuesForKeys(keys).description
+        return statusInfo.description + " 缩略图 URL 数组 \(thumbnailURLs)"
     }
 }

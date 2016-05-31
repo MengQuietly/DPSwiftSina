@@ -28,7 +28,7 @@ class MQStatusCell: UITableViewCell {
     /// picture宽度约束
     var pictureViewWidthLayout: NSLayoutConstraint?
     /// picture高度约束
-    var pictureViewHegihtLayout: NSLayoutConstraint?
+    var pictureViewHeightLayout: NSLayoutConstraint?
     
     
     /// 微博数据视图模型
@@ -37,13 +37,19 @@ class MQStatusCell: UITableViewCell {
             
             // 模型数值被设置之后，马上要产生的连锁反应 - 界面UI发生变化
             cellWithTopView.statusViewModel = statusViewModel
-            
             contentLabel.text = statusViewModel?.statusInfo.text
+            // 设置配图视图 －> 内部的 sizeToFit 计算出大小
+            pictureView.statusViewModel = statusViewModel
+            // 设置配图视图的大小
+            pictureViewWidthLayout?.constant = pictureView.bounds.width
+            pictureViewHeightLayout?.constant = pictureView.bounds.height
             
+            /* 测试视图行高
             // 提示：在自动布局系统中，随机修改表格约束，使用自动计算行高很容易出问题(需去除 tableView.rowHeight = UITableViewAutomaticDimension)！
             // 通过测试，提前确定方法的可行性！
             printLog(random() % 4)
             pictureViewHegihtLayout?.constant = MQStatusPictureItemWith * CGFloat(random() % 4)
+            */
         }
     }
     
@@ -82,7 +88,7 @@ class MQStatusCell: UITableViewCell {
         let pictureCons = pictureView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: contentLabel, size: CGSize(width: MQStatusPictureMaxWith,height: MQStatusPictureMaxWith), offset: CGPoint(x: 0, y: MQStatusCellMargin))
         // 记录配图视图约束
         pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
-        pictureViewHegihtLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
+        pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
         
         // 5> 底部视图
         cellWithBottomView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: pictureView, size: CGSize(width: MQAppWith,height: 44), offset: CGPoint(x: -MQStatusCellMargin, y: MQStatusCellMargin))

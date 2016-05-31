@@ -18,6 +18,9 @@ class MQStatusInfo: NSObject {
     var text: String?
     /// 微博来源
     var source: String?
+    /// 配图URL字符串的数组
+    var pic_urls: [[String: String]]?
+    
     /// 用户模型 － 如果直接使用 KVC，会变成字典
     var user: MQUserInfo?
     
@@ -44,7 +47,7 @@ class MQStatusInfo: NSObject {
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
     
     override var description: String{
-        let keys = ["created_at", "id", "text", "source","user"]
+        let keys = ["created_at", "id", "text", "source","user", "pic_urls"]
         return dictionaryWithValuesForKeys(keys).description
     }
 }
