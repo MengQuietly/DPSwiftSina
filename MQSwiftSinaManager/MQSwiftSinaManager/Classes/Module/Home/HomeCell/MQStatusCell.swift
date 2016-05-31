@@ -30,7 +30,6 @@ class MQStatusCell: UITableViewCell {
     /// picture高度约束
     var pictureViewHeightLayout: NSLayoutConstraint?
     
-    
     /// 微博数据视图模型
     var statusViewModel: MQStatusViewModel? {
         didSet{
@@ -51,6 +50,22 @@ class MQStatusCell: UITableViewCell {
             pictureViewHegihtLayout?.constant = MQStatusPictureItemWith * CGFloat(random() % 4)
             */
         }
+    }
+    
+    /// 计算指定视图模型对应的行高
+    ///
+    /// - parameter viewModel: viewModel
+    ///
+    /// - returns: 计算的行高
+    func cellRowHeight(viewModel: MQStatusViewModel) -> CGFloat {
+        // 1. 设置视图模型 － 会调用 模型的 didSet
+        statusViewModel = viewModel
+        
+        // 2. 有了内容之后更新约束
+        layoutIfNeeded()
+        
+        // 3. 返回底部视图的最大高度
+        return CGRectGetMaxY(cellWithBottomView.frame)
     }
     
     // MARK: - 搭建界面

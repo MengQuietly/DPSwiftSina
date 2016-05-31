@@ -86,4 +86,17 @@ extension MQHomeController{
         // 3. 返回 cell
         return cell
     }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        // 0. 获得模型
+        let viewModel = statusesListModel.statusList[indexPath.row] as! MQStatusViewModel
+        
+        // 1. 获得 cell(注意：不能使用 带 dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) 方法，否则会死循环)
+        let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID) as! MQStatusCell
+        
+        // 2. 返回行高
+        return cell.cellRowHeight(viewModel)
+        
+    }
 }
