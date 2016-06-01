@@ -67,7 +67,7 @@ class MQStatusViewModel: NSObject {
         // 给缩略图数组设置数值
         // 转发的原创微博有图，statusInfos.pic_urls 一定没有图
         // 原创（statusInfos.pic_urls）是否有图像，转发（statusInfos.retweeted_status?.pic_urls）是否有图像
-        if let picUrlsList = (statusInfos.retweeted_status?.pic_urls != nil) ? statusInfos.retweeted_status?.pic_urls : statusInfos.pic_urls {
+        if let picUrlsList = statusInfos.retweeted_status?.pic_urls ?? statusInfos.pic_urls {
             
             thumbnailURLs = [NSURL]()
             
