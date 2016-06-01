@@ -14,6 +14,9 @@ class MQStatusViewModel: NSObject {
     /// 微博对象
     var statusInfo : MQStatusInfo
     
+    /// 当前模型对应的缓存行高
+    var cellRowHeight: CGFloat = 0
+    
     /// 用户头像 URL
     var avatarUrl : NSURL?{
         return NSURL(string: statusInfo.user!.profile_image_url ?? "")

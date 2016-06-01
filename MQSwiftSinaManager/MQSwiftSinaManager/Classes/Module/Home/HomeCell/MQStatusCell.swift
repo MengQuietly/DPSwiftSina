@@ -57,11 +57,14 @@ class MQStatusCell: UITableViewCell {
     }
     
     /// 计算指定视图模型对应的行高
-    ///
+    /// 注意：每行都会调用此方法计算行高，若加了 缓存行高，则只会每行计算一次
     /// - parameter viewModel: viewModel
     ///
     /// - returns: 计算的行高
     func cellRowHeight(viewModel: MQStatusViewModel) -> CGFloat {
+        
+        printLog("计算行高")
+        
         // 1. 设置视图模型 － 会调用 模型的 didSet
         statusViewModel = viewModel
         
