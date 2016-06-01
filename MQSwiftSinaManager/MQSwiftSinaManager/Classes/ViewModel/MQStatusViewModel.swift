@@ -65,28 +65,21 @@ class MQStatusViewModel: NSObject {
         self.statusInfo = statusInfos
         
         // 给缩略图数组设置数值
-        // 判断原创是否有图像
-        if statusInfos.pic_urls != nil {
+        // 转发的原创微博有图，statusInfos.pic_urls 一定没有图
+        // 原创（statusInfos.pic_urls）是否有图像，转发（statusInfos.retweeted_status?.pic_urls）是否有图像
+        if let picUrlsList = (statusInfos.retweeted_status?.pic_urls != nil) ? statusInfos.retweeted_status?.pic_urls : statusInfos.pic_urls {
+            
             thumbnailURLs = [NSURL]()
             
             // 遍历数组，插入 URL
-            for dict in statusInfos.pic_urls! {
+            for dict in picUrlsList {
                 // 第一个 `!` 确保字典中 thumbnail_pic `key` 一定存在
                 // 第二个 `!` 确保后台返回 URL字符串 一定能创建出 URL，通常由后台返回的URL是添加过百分号转义的！
                 thumbnailURLs?.append(NSURL(string: dict["thumbnail_pic"]!)!)
             }
+
         }
         
-        // 转发的原创微博有图，statusInfos.pic_urls 一定没有图
-        if statusInfos.retweeted_status?.pic_urls != nil {
-            thumbnailURLs = [NSURL]()
-            
-            // 遍历数组，插入 URL
-            for dict in (statusInfos.retweeted_status!.pic_urls)! {
-                thumbnailURLs?.append(NSURL(string: dict["thumbnail_pic"]!)!)
-            }
-        }
-
         super.init()
     }
     
