@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// 原创微博Cell： MQStatusNomalCell 重用标识符
+let MQStatusNomalCellID = "MQStatusNomalCellID"
+/// 转发微博Cell：MQStatusForwardCell 重用标识符
+let MQStatusForwardCellID = "MQStatusForwardCellID"
+
 /// 微博的视图模型，供界面显示使用
 class MQStatusViewModel: NSObject {
    
@@ -16,6 +21,11 @@ class MQStatusViewModel: NSObject {
     
     /// 当前模型对应的缓存行高
     var cellRowHeight: CGFloat = 0
+    
+    /// 返回当前视图模型对应的可重用标识符
+    var cellID: String{
+        return statusInfo.retweeted_status != nil ? MQStatusForwardCellID : MQStatusNomalCellID
+    }
     
     /// 被转发的原创微博文字，格式: @作者:原文
     var forwardText: String?{

@@ -43,14 +43,13 @@ class MQStatusForwardCell: MQStatusCell {
         pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
         pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
         pictureViewTopLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Top)
-        
     }
 
     // MARK: - 懒加载控件
     /// 转发背景颜色按钮
     private lazy var backgroundBtn:UIButton = {
         let backgroundBtns = UIButton()
-        backgroundBtns.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        backgroundBtns.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         return backgroundBtns
     }()
     

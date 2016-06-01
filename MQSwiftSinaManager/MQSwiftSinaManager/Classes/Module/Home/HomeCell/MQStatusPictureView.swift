@@ -77,7 +77,7 @@ class MQStatusPictureView: UICollectionView {
         // 注意：必须使用 UICollectionViewFlowLayout() 对 colectionView 进行初始化
         super.init(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
         
-        backgroundColor = UIColor.redColor()
+        backgroundColor = UIColor.whiteColor()
         
         // 设置布局的间距
         let layout = collectionViewLayout as! UICollectionViewFlowLayout

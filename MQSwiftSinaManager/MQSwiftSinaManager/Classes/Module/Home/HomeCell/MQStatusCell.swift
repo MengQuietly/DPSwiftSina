@@ -15,8 +15,7 @@ let MQStatusAvatarWidth: CGFloat = 35
  /// 默认 pictureItem 大小
 let MQStatusPictureItemWith: CGFloat = 90
  /// 默认 pictureItem 间距
-let MQStatusPictureItemMargin: CGFloat = 10
-
+let MQStatusPictureItemMargin: CGFloat = 8
 /// 默认 picture 每行最大图片数量
 let MQStatusPictureRowMaxCount: CGFloat = 3
 /// 默认 picture 最大尺寸
@@ -105,14 +104,7 @@ class MQStatusCell: UITableViewCell {
         
         // 3> 正文标签
         contentLabel.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: cellWithTopView, size: nil, offset: CGPoint(x: MQStatusCellMargin, y: MQStatusCellMargin))
-        
-//        // 4> 配图视图
-//        let pictureCons = pictureView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: contentLabel, size: CGSize(width: MQStatusPictureMaxWith,height: MQStatusPictureMaxWith), offset: CGPoint(x: 0, y: MQStatusCellMargin))
-//        // 记录配图视图约束
-//        pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
-//        pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
-//        pictureViewTopLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Top)
-        
+                
         // 5> 底部视图
         cellWithBottomView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: pictureView, size: CGSize(width: MQAppWith,height: 44), offset: CGPoint(x: -MQStatusCellMargin, y: MQStatusCellMargin))
         

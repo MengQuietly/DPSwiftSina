@@ -9,11 +9,6 @@
 import UIKit
 import SVProgressHUD
 
-/// MQStatusCell 重用标识符
-private let MQStatusCellID = "MQStatusCellID"
-/// MQStatusForwardCell 重用标识符
-private let MQStatusForwardCellID = "MQStatusForwardCellID"
-
 // MARK: - 关于表格自动计算行高问题
 // 注意：在实际开发中，自动布局约束通常是加多了，一旦po 错，可尝试阅读错误输出，删除一些不必要的约束，就能解决！
 // 1.不要使用自动计算行高（tableView.rowHeight = UITableViewAutomaticDimension）
@@ -34,7 +29,9 @@ class MQHomeController: MQBaseTableViewController {
             return
         }
         // 注册重用 cell
+        tableView.registerClass(MQStatusNomalCell.self, forCellReuseIdentifier: MQStatusNomalCellID)
         tableView.registerClass(MQStatusForwardCell.self, forCellReuseIdentifier: MQStatusForwardCellID)
+        
         // 以下两句就可以自动处理行高，条件：
         // 提示：如果不使用自动计算行高，UITableViewAutomaticDimension，一定不要设置底部约束（需去除 statusBottomView 约束）
         tableView.estimatedRowHeight = 200
@@ -71,19 +68,19 @@ extension MQHomeController{
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        /// 1. dequeueReusableCellWithIdentifier:indexPath 一定会返回一个cell，必须注册可重用cell
+        // 0. 获取微博数据
+        let viewModel = statusesListModel.statusList[indexPath.row] as! MQStatusViewModel
+        
+        /// 1) dequeueReusableCellWithIdentifier:indexPath 一定会返回一个cell，必须注册可重用cell
         /// 注册：registerClass/registerNib(XIB)/在 SB 中指定
         /// 如果缓冲区 cell 不存在，会使用原型 cell 实例化一个新的 cell
-        /// 2. dequeueReusableCellWithIdentifier，会查询可重用cell，如果注册原型cell，能够查询到，否则，返回 nil
+        /// 2) dequeueReusableCellWithIdentifier，会查询可重用cell，如果注册原型cell，能够查询到，否则，返回 nil
         /// 需要后续判断 if (cell == nil) ，是在 iOS 5.0 开发使用的
-        /// 获得可重用cell的同时要获得行高
-        let cell = tableView.dequeueReusableCellWithIdentifier(MQStatusForwardCellID, forIndexPath: indexPath) as! MQStatusForwardCell
-        
-        // 1. 获取微博数据
-        let statusInfos = statusesListModel.statusList[indexPath.item] as! MQStatusViewModel
+        /// 1.获得可重用cell的同时要获得行高
+        let cell = tableView.dequeueReusableCellWithIdentifier(viewModel.cellID, forIndexPath: indexPath) as! MQStatusCell
         
         // 2. 设置数据
-        cell.statusViewModel = statusInfos
+        cell.statusViewModel = viewModel
         
         // 3. 返回 cell
         return cell
@@ -102,14 +99,13 @@ extension MQHomeController{
         // 0. 获得模型
         let viewModel = statusesListModel.statusList[indexPath.row] as! MQStatusViewModel
         
-        
         if viewModel.cellRowHeight > 0 {
             printLog("statusCell 缓存行高：\(viewModel.cellRowHeight)")
             return viewModel.cellRowHeight
         }
         
         // 1. 获得 cell(注意：不能使用 带 dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) 方法，否则会死循环［因为调用indexpath 代理时，会调用 heightForRowAtIndexPath 此代理方法］)
-        let cell = tableView.dequeueReusableCellWithIdentifier(MQStatusForwardCellID) as! MQStatusForwardCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(viewModel.cellID) as! MQStatusCell
         
         // 3. 记录缓存行高
         viewModel.cellRowHeight = cell.cellRowHeight(viewModel)
