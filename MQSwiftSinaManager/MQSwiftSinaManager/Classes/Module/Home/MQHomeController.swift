@@ -9,8 +9,10 @@
 import UIKit
 import SVProgressHUD
 
-/// HomeCell 重用标识符
-private let MQHomeCellID = "MQHomeCellID"
+/// MQStatusCell 重用标识符
+private let MQStatusCellID = "MQStatusCellID"
+/// MQStatusForwardCell 重用标识符
+private let MQStatusForwardCellID = "MQStatusForwardCellID"
 
 // MARK: - 关于表格自动计算行高问题
 // 注意：在实际开发中，自动布局约束通常是加多了，一旦po 错，可尝试阅读错误输出，删除一些不必要的约束，就能解决！
@@ -32,7 +34,7 @@ class MQHomeController: MQBaseTableViewController {
             return
         }
         // 注册重用 cell
-        tableView.registerClass(MQStatusCell.self, forCellReuseIdentifier: MQHomeCellID)
+        tableView.registerClass(MQStatusForwardCell.self, forCellReuseIdentifier: MQStatusForwardCellID)
         // 以下两句就可以自动处理行高，条件：
         // 提示：如果不使用自动计算行高，UITableViewAutomaticDimension，一定不要设置底部约束（需去除 statusBottomView 约束）
         tableView.estimatedRowHeight = 200
@@ -75,7 +77,7 @@ extension MQHomeController{
         /// 2. dequeueReusableCellWithIdentifier，会查询可重用cell，如果注册原型cell，能够查询到，否则，返回 nil
         /// 需要后续判断 if (cell == nil) ，是在 iOS 5.0 开发使用的
         /// 获得可重用cell的同时要获得行高
-        let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID, forIndexPath: indexPath) as! MQStatusCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(MQStatusForwardCellID, forIndexPath: indexPath) as! MQStatusForwardCell
         
         // 1. 获取微博数据
         let statusInfos = statusesListModel.statusList[indexPath.item] as! MQStatusViewModel
@@ -107,7 +109,7 @@ extension MQHomeController{
         }
         
         // 1. 获得 cell(注意：不能使用 带 dequeueReusableCellWithIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) 方法，否则会死循环［因为调用indexpath 代理时，会调用 heightForRowAtIndexPath 此代理方法］)
-        let cell = tableView.dequeueReusableCellWithIdentifier(MQHomeCellID) as! MQStatusCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(MQStatusForwardCellID) as! MQStatusForwardCell
         
         // 3. 记录缓存行高
         viewModel.cellRowHeight = cell.cellRowHeight(viewModel)

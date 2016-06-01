@@ -17,6 +17,14 @@ class MQStatusViewModel: NSObject {
     /// 当前模型对应的缓存行高
     var cellRowHeight: CGFloat = 0
     
+    /// 被转发的原创微博文字，格式: @作者:原文
+    var forwardText: String?{
+        let userName = statusInfo.retweeted_status?.user?.name ?? ""
+        let forwardTitle = statusInfo.retweeted_status?.text ?? ""
+        
+        return "@\(userName):\n\(forwardTitle)"
+    }
+    
     /// 用户头像 URL
     var avatarUrl : NSURL?{
         return NSURL(string: statusInfo.user!.profile_image_url ?? "")

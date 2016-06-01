@@ -24,6 +24,9 @@ class MQStatusInfo: NSObject {
     /// 用户模型 － 如果直接使用 KVC，会变成字典
     var user: MQUserInfo?
     
+    /// 被转发的原创微博对象
+    var retweeted_status: MQStatusInfo?
+    
     // MARK: - 构造函数
     // NSArray & NSDictionary 在 swfit 中极少用，contentOfFile  加载 plist 才会用
     init(dict:[String: AnyObject]) {
@@ -41,13 +44,22 @@ class MQStatusInfo: NSObject {
             // 如果不return，user 属性又会被默认的 KVC 方法，设置成字典
             return
         }
+        
+        // 判断 key 是否是 "retweeted_status"
+        if key == "retweeted_status" {
+            
+            retweeted_status =  MQStatusInfo(dict: value as! [String: AnyObject])
+            return
+        }
+
+        
         super.setValue(value, forKey: key)
     }
     
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {}
     
     override var description: String{
-        let keys = ["created_at", "id", "text", "source","user", "pic_urls"]
+        let keys = ["created_at", "id", "text", "source","user", "pic_urls", "retweeted_status"]
         return dictionaryWithValuesForKeys(keys).description
     }
 }

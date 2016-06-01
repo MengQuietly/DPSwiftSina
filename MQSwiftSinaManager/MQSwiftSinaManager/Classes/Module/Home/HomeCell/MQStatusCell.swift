@@ -87,7 +87,7 @@ class MQStatusCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUpUI(){
+    func setUpUI(){
         cellTopSepView.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
         // 1.添加控件
         contentView.addSubview(cellTopSepView)
@@ -106,12 +106,12 @@ class MQStatusCell: UITableViewCell {
         // 3> 正文标签
         contentLabel.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: cellWithTopView, size: nil, offset: CGPoint(x: MQStatusCellMargin, y: MQStatusCellMargin))
         
-        // 4> 配图视图
-        let pictureCons = pictureView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: contentLabel, size: CGSize(width: MQStatusPictureMaxWith,height: MQStatusPictureMaxWith), offset: CGPoint(x: 0, y: MQStatusCellMargin))
-        // 记录配图视图约束
-        pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
-        pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
-        pictureViewTopLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Top)
+//        // 4> 配图视图
+//        let pictureCons = pictureView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: contentLabel, size: CGSize(width: MQStatusPictureMaxWith,height: MQStatusPictureMaxWith), offset: CGPoint(x: 0, y: MQStatusCellMargin))
+//        // 记录配图视图约束
+//        pictureViewWidthLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Width)
+//        pictureViewHeightLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
+//        pictureViewTopLayout = pictureView.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Top)
         
         // 5> 底部视图
         cellWithBottomView.ff_AlignVertical(type: ff_AlignType.BottomLeft, referView: pictureView, size: CGSize(width: MQAppWith,height: 44), offset: CGPoint(x: -MQStatusCellMargin, y: MQStatusCellMargin))
@@ -127,11 +127,11 @@ class MQStatusCell: UITableViewCell {
     /// 2. 顶部视图
     private lazy var cellWithTopView:MQStatusCellWithTopView = MQStatusCellWithTopView()
     /// 3. 文本标签
-    private lazy var contentLabel = UILabel(title: nil, color: UIColor.darkGrayColor(), fontSize: 15, layoutWidth: MQAppWith - 2 * MQStatusCellMargin)
+    lazy var contentLabel = UILabel(title: nil, color: UIColor.darkGrayColor(), fontSize: 15, layoutWidth: MQAppWith - 2 * MQStatusCellMargin)
     /// 4. 配图视图
-    private lazy var pictureView:MQStatusPictureView = MQStatusPictureView()
+    lazy var pictureView:MQStatusPictureView = MQStatusPictureView()
     /// 5. 底部视图
-    private lazy var cellWithBottomView:MQStatusCellWithBottomView = MQStatusCellWithBottomView()
+    lazy var cellWithBottomView:MQStatusCellWithBottomView = MQStatusCellWithBottomView()
     
 }
 
