@@ -24,6 +24,9 @@ class MQStatusInfo: NSObject {
     /// 用户模型 － 如果直接使用 KVC，会变成字典
     var user: MQUserInfo?
     
+    /// 如果是原创微博有图，在 pic_urls 数组中记录
+    /// 如果是`转发微博`有图，在 retweeted_status.pic_urls 数组中记录
+    /// 如果`转发微博`有图，pic_urls 数组中没有图
     /// 被转发的原创微博对象
     var retweeted_status: MQStatusInfo?
     

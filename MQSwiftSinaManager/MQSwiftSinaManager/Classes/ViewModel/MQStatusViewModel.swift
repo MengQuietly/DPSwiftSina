@@ -30,6 +30,9 @@ class MQStatusViewModel: NSObject {
         return NSURL(string: statusInfo.user!.profile_image_url ?? "")
     }
     
+    /// 如果是原创微博有图，在 pic_urls 数组中记录
+    /// 如果是`转发微博`有图，在 retweeted_status.pic_urls 数组中记录
+    /// 如果`转发微博`有图，pic_urls 数组中没有图
     /// 配图缩略图 URL 数组
     var thumbnailURLs: [NSURL]?
     
@@ -62,7 +65,7 @@ class MQStatusViewModel: NSObject {
         self.statusInfo = statusInfos
         
         // 给缩略图数组设置数值
-        // 判断是否有图像
+        // 判断原创是否有图像
         if statusInfos.pic_urls != nil {
             thumbnailURLs = [NSURL]()
             
@@ -74,12 +77,20 @@ class MQStatusViewModel: NSObject {
             }
         }
         
+        // 转发的原创微博有图，statusInfos.pic_urls 一定没有图
+        if statusInfos.retweeted_status?.pic_urls != nil {
+            thumbnailURLs = [NSURL]()
+            
+            // 遍历数组，插入 URL
+            for dict in (statusInfos.retweeted_status!.pic_urls)! {
+                thumbnailURLs?.append(NSURL(string: dict["thumbnail_pic"]!)!)
+            }
+        }
+
         super.init()
     }
     
     override var description: String {
-//        let keys = ["thumbnailURLs"]
-//        return dictionaryWithValuesForKeys(keys).description
         return statusInfo.description + " 缩略图 URL 数组 \(thumbnailURLs)"
     }
 }
