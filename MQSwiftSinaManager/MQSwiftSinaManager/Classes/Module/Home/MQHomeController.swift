@@ -18,9 +18,6 @@ import SVProgressHUD
 /// MVVM 中控制器／视图模型不能直接引用模型
 class MQHomeController: MQBaseTableViewController {
     
-    /// 微博列表视图模型
-    private lazy var statusesListModel = MQStatusListModel()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +49,10 @@ class MQHomeController: MQBaseTableViewController {
         refreshControl?.addTarget(self, action: #selector(loadWeiboList), forControlEvents: UIControlEvents.ValueChanged)
         
         loadWeiboList()
+        
+        pullUpRefreshView.startAnimating()
+        // 上拉提示控件
+        tableView.tableFooterView = pullUpRefreshView
     }
     
     /// 加载微博数据
@@ -74,6 +75,18 @@ class MQHomeController: MQBaseTableViewController {
                 self.tableView.reloadData()
         }
     }
+    
+    // MARK: - 懒加载控件
+    /// 微博列表视图模型
+    private lazy var statusesListModel = MQStatusListModel()
+
+    /// 上拉刷新视图
+    private lazy var pullUpRefreshView: UIActivityIndicatorView = {
+        let pullUpRefreshViews = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        pullUpRefreshViews.color = UIColor.darkGrayColor()
+        return pullUpRefreshViews
+    }()
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -101,6 +114,11 @@ extension MQHomeController{
         
         // 2. 设置数据
         cell.statusViewModel = viewModel
+        
+        if (indexPath.row == statusesListModel.statusList.count - 1) && !pullUpRefreshView.isAnimating(){
+            printLog("显示上拉视图")
+            pullUpRefreshView.startAnimating()
+        }
         
         // 3. 返回 cell
         return cell
