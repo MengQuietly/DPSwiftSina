@@ -46,9 +46,11 @@ class MQHomeController: MQBaseTableViewController {
     /// 加载微博数据
     func loadWeiboList() {
         
-        statusesListModel.loadStatuses().subscribeNext({ (error) in
-            printLog("首页加载微博数据失败", logError: true)
-            SVProgressHUD.showInfoWithStatus("您的网络不给力！")
+        statusesListModel.loadStatuses().subscribeNext({ (result) in
+            // TODO:
+            }, error: { (error) in
+                printLog("首页加载微博数据失败", logError: true)
+                SVProgressHUD.showInfoWithStatus("您的网络不给力！")
             }) { 
                 // 刷新表格
                 self.tableView.reloadData()

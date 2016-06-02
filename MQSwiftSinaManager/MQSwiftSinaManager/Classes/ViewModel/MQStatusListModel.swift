@@ -47,15 +47,17 @@ class MQStatusListModel: NSObject {
                     arrayM.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
                 }
                 
-                self?.cacheWebImage(arrayM as! [MQStatusViewModel])
+                // 添加尾随闭包
+                self?.cacheWebImage(arrayM as! [MQStatusViewModel]){
+                    self?.statusList += arrayM
+                    
+                    printLog("字典转模型后数组：\(self?.statusList)")
+                    
+                    // 3.通知调用方
+                    subscriber.sendCompleted()
+                }
                 
-                self?.statusList += arrayM
-                
-                printLog("字典转模型后数组：\(self?.statusList)")
-                
-                // 3.通知调用方
-                subscriber.sendCompleted()
-                }, error: { (error) in
+            }, error: { (error) in
                     printLog("加载微博数据失败结果：\(error)", logError: true)
                     subscriber.sendError(error)
             }) {}
@@ -67,7 +69,8 @@ class MQStatusListModel: NSObject {
     /// 缓存网络图片
     ///
     /// - parameter array:    视图模型数组
-    private func cacheWebImage(array: [MQStatusViewModel]){
+    /// - parameter finished: 完成回调
+    private func cacheWebImage(array: [MQStatusViewModel],finished:()->()){
         
         // 记录缓存图像大小
         var imgDataLength = 0
@@ -103,6 +106,9 @@ class MQStatusListModel: NSObject {
             // 4>调度组监听
             dispatch_group_notify(groups, dispatch_get_main_queue(), { 
                 printLog("缓存完成:\(NSHomeDirectory()),大小：\(imgDataLength/1024) K")
+                
+                // 执行闭包
+                finished()
             })
             
             printLog("－－－－－－调度组后：\(viewModel.thumbnailURLs)")
