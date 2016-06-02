@@ -17,6 +17,8 @@
 		0936B5391CFD33F400AE202E /* MQStatusPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936B5381CFD33F400AE202E /* MQStatusPictureView.swift */; };
 		0936B53B1CFE91A800AE202E /* MQStatusForwardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936B53A1CFE91A800AE202E /* MQStatusForwardCell.swift */; };
 		0936B53D1CFEC61B00AE202E /* MQStatusNomalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936B53C1CFEC61B00AE202E /* MQStatusNomalCell.swift */; };
+		0936B57F1D00131800AE202E /* MQRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936B57E1D00131800AE202E /* MQRefreshControl.swift */; };
+		0936B5811D0014C200AE202E /* MQRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0936B5801D0014C200AE202E /* MQRefreshView.xib */; };
 		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
 		0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */; };
 		0938DABD1CF7ECCB00E3A8CD /* MQNewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */; };
@@ -70,6 +72,8 @@
 		0936B5381CFD33F400AE202E /* MQStatusPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusPictureView.swift; sourceTree = "<group>"; };
 		0936B53A1CFE91A800AE202E /* MQStatusForwardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusForwardCell.swift; sourceTree = "<group>"; };
 		0936B53C1CFEC61B00AE202E /* MQStatusNomalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQStatusNomalCell.swift; sourceTree = "<group>"; };
+		0936B57E1D00131800AE202E /* MQRefreshControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQRefreshControl.swift; sourceTree = "<group>"; };
+		0936B5801D0014C200AE202E /* MQRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MQRefreshView.xib; sourceTree = "<group>"; };
 		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
 		0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountViewModel.swift; sourceTree = "<group>"; };
 		0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNewFeatureController.swift; sourceTree = "<group>"; };
@@ -151,6 +155,15 @@
 			path = HomeCell;
 			sourceTree = "<group>";
 		};
+		0936B57D1D0012E200AE202E /* HomeRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				0936B57E1D00131800AE202E /* MQRefreshControl.swift */,
+				0936B5801D0014C200AE202E /* MQRefreshView.xib */,
+			);
+			path = HomeRefresh;
+			sourceTree = "<group>";
+		};
 		0938DABB1CF7ECA100E3A8CD /* NewFeature */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +221,7 @@
 		09760A4A1CEEB19F00726AD1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0936B57D1D0012E200AE202E /* HomeRefresh */,
 				090DA5B71CFBDB470009903A /* HomeCell */,
 				09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */,
 			);
@@ -454,6 +468,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0936B5811D0014C200AE202E /* MQRefreshView.xib in Resources */,
 				09DA0AD01CEC75EE0037C88F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +565,7 @@
 				09E1A6E91CEEEE37009DF2B8 /* MQTabBarController.swift in Sources */,
 				090DA5B91CFBDB810009903A /* UILabel+Extensions.swift in Sources */,
 				09F73AC81CFAD7E0003F857E /* MQStatusListModel.swift in Sources */,
+				0936B57F1D00131800AE202E /* MQRefreshControl.swift in Sources */,
 				0936B5391CFD33F400AE202E /* MQStatusPictureView.swift in Sources */,
 				09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,

@@ -48,7 +48,7 @@ class MQHomeController: MQBaseTableViewController {
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
         // 准备下拉刷新控件 － 刷新控件的高度是 60 点
-        refreshControl = UIRefreshControl()
+        refreshControl = MQRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadWeiboList), forControlEvents: UIControlEvents.ValueChanged)
         
         loadWeiboList()
