@@ -38,6 +38,7 @@ class MQStatusCellWithTopView: UIView {
     }
     
     func setUpUI() {
+        backgroundColor = UIColor.whiteColor()
         
         // 1.添加控件
         addSubview(avatarImg)

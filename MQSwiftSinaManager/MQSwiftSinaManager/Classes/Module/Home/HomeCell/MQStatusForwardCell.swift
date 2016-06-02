@@ -49,7 +49,7 @@ class MQStatusForwardCell: MQStatusCell {
     /// 转发背景颜色按钮
     private lazy var backgroundBtn:UIButton = {
         let backgroundBtns = UIButton()
-        backgroundBtns.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        backgroundBtns.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
         return backgroundBtns
     }()
     

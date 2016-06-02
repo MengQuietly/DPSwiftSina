@@ -91,7 +91,7 @@ class MQStatusPictureView: UICollectionView {
         // 注意：必须使用 UICollectionViewFlowLayout() 对 colectionView 进行初始化
         super.init(frame: frame, collectionViewLayout: UICollectionViewFlowLayout())
         
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor(white: 0.95, alpha: 1.0)
         
         // 设置布局的间距
         let layout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -151,5 +151,11 @@ private class MQStatusPictureViewCell : UICollectionViewCell{
     }
     
     // MARK: - 懒加载
-    private let iconView: UIImageView = UIImageView()
+    private let iconView: UIImageView = {
+        let iconViews = UIImageView()
+        // 设置填充方式
+        iconViews.contentMode = UIViewContentMode.ScaleAspectFill
+        iconViews.clipsToBounds = true
+        return iconViews
+    }()
 }
