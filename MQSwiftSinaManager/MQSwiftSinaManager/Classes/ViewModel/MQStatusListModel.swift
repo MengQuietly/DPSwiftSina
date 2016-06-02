@@ -8,12 +8,14 @@
 
 import UIKit
 import ReactiveCocoa
+import SDWebImage
 
 /// 微博列表视图模型－分离网络方法
 class MQStatusListModel: NSObject {
     
     // 微博数据数组 － AnyObject 原因不详
-    var statusList:[AnyObject] = [MQStatusViewModel]()
+    lazy var statusList:[AnyObject] = [MQStatusViewModel]()
+    
     // 加载微博数据
     func loadStatuses() -> RACSignal {
         
@@ -37,10 +39,18 @@ class MQStatusListModel: NSObject {
                 
                 // 2.字典转模型
             
+                // 定义并且创建一个临时数组，记录当前网络请求返回的结果
+                var arrayM = [AnyObject]()
+                
                 // 遍历数组，字典转模型
                 for dict in statusArray{
-                    self?.statusList.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
+                    arrayM.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
                 }
+                
+                self?.cacheWebImage(arrayM as! [MQStatusViewModel])
+                
+                self?.statusList += arrayM
+                
                 printLog("字典转模型后数组：\(self?.statusList)")
                 
                 // 3.通知调用方
@@ -52,6 +62,50 @@ class MQStatusListModel: NSObject {
             
             return nil
         })
+    }
+    
+    /// 缓存网络图片
+    ///
+    /// - parameter array:    视图模型数组
+    private func cacheWebImage(array: [MQStatusViewModel]){
         
+        // 记录缓存图像大小
+        var imgDataLength = 0
+        
+        // 1>调度组
+        let groups = dispatch_group_create()
+        
+        // 遍历视图模型数组
+        for viewModel in array {
+            
+            // 目标：只需要缓存单张图片
+            let imgCount = viewModel.thumbnailURLs?.count ?? 0
+            if imgCount != 1 {
+                continue
+            }
+            
+            // 2>入组 - 紧贴着 block/闭包，enter & leave 要配对出现
+            dispatch_group_enter(groups)
+            
+            // 使用 SDWebImage 的核心函数下载图片
+            SDWebImageManager.sharedManager().downloadImageWithURL(viewModel.thumbnailURLs![0], options: [], progress: nil, completed: { (image, _, _, _, _) in
+                
+                // 代码执行到此，图片已经缓存完成，不一定有 image
+                if image != nil{
+                    // 将 image 转换成二进制数据
+                    let pngData = UIImagePNGRepresentation(image)
+                    imgDataLength += pngData?.length ?? 0
+                }
+                // 3>出组 - block 的最后一句
+                dispatch_group_leave(groups)
+            })
+            
+            // 4>调度组监听
+            dispatch_group_notify(groups, dispatch_get_main_queue(), { 
+                printLog("缓存完成:\(NSHomeDirectory()),大小：\(imgDataLength/1024) K")
+            })
+            
+            printLog("－－－－－－调度组后：\(viewModel.thumbnailURLs)")
+        }
     }
 }
