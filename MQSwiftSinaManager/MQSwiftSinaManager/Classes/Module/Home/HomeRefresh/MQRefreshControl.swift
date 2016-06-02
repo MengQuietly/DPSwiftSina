@@ -13,6 +13,13 @@ private let MQRefreshControlMaxOffsetY: CGFloat = -60
 
 /// 刷新控件，负责和控制器交互
 class MQRefreshControl: UIRefreshControl {
+    
+    /// 停止刷新
+    override func endRefreshing() {
+        super.endRefreshing()
+        // 停止动画
+        refreshView.stopAnimation()
+    }
 
     // MARK: - KVO 监听方法
     // 监听对象的 key value 一旦变化，就会调用此方法
@@ -24,6 +31,12 @@ class MQRefreshControl: UIRefreshControl {
         
         // 判断是否是上拉（上拉不反应）
         if frame.origin.y > 0 {
+            return
+        }
+        
+        // 判断是否正在刷新
+        if refreshing {
+            refreshView.loadingAnimation()
             return
         }
         
@@ -84,7 +97,11 @@ class MQRefreshView: UIView {
         }
     }
     
-    /// 下拉提示图标
+    /// 加载图标（圆圈）
+    @IBOutlet weak var loadingImg: UIImageView!
+    /// 提示视图
+    @IBOutlet weak var tipView: UIView!
+    /// 下拉提示图标（箭头）
     @IBOutlet weak var pullRefreshImg: UIImageView!
     
     /// 负责从 XIB 加载视图
@@ -104,5 +121,32 @@ class MQRefreshView: UIView {
             // 在 iOS 的 block 动画中，旋转是默认顺时针，就近原则
             self.pullRefreshImg.transform = CGAffineTransformRotate(self.pullRefreshImg.transform, angle)
         }
+    }
+    
+    /// 加载动画
+    private func loadingAnimation(){
+        
+        // 通过 key 能够拿到图层上的动画
+        let loadAnimKey = "loadAnimKey"
+        if loadingImg.layer.animationForKey(loadAnimKey) != nil {
+            return
+        }
+        
+        // 隐藏箭头刷新视图
+        tipView.hidden = true
+        
+        let anim = CABasicAnimation(keyPath: "transform.rotation")
+        anim.toValue = 2 * M_PI
+        anim.repeatCount = MAXFLOAT
+        anim.duration = 1
+        
+        loadingImg.layer.addAnimation(anim, forKey: loadAnimKey)
+    }
+    
+    /// 停止动画
+    private func stopAnimation(){
+        tipView.hidden = false
+        
+        loadingImg.layer.removeAllAnimations()
     }
 }

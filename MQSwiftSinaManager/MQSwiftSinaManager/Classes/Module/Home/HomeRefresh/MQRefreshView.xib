@@ -40,7 +40,9 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="loadingImg" destination="GEe-zY-iZV" id="W3f-1m-z6B"/>
                 <outlet property="pullRefreshImg" destination="VPy-dH-Jdi" id="437-jN-NaX"/>
+                <outlet property="tipView" destination="NVB-zS-eOb" id="tqY-pI-X1H"/>
             </connections>
             <point key="canvasLocation" x="449" y="-429"/>
         </view>
