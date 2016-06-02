@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 /// 可重用标识符
 private let MQStatusPictureViewCellID = "MQStatusPictureViewCellID"
@@ -51,10 +52,23 @@ class MQStatusPictureView: UICollectionView {
         
         // 2> 1张图
         if pictureCount == 1 {
-            // TODO: - 临时返回一个大小
-            let size = CGSize(width: 150, height: 150)
-            layout.itemSize = size
-            return size
+            // 临时返回一个大小
+            var imgSize = CGSize(width: 150, height: 150)
+            
+            // 判断图片是否已经被正确的缓存 Key 是 URL 的完整字符串
+            let imgPath = statusViewModel?.thumbnailURLs![0].absoluteString
+            
+            // 如果有缓存图片，记录当前图片的大小
+            if let cacheImg = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(imgPath) {
+                imgSize = cacheImg.size
+            }
+            
+            // 单独处理 图片宽度过大、过小
+            imgSize.width = (imgSize.width > 300) ? 300 : imgSize.width
+            imgSize.width = (imgSize.width < 40) ? 40 : imgSize.width
+            
+            layout.itemSize = imgSize
+            return imgSize
         }
         
         // 3> 4张图 2 * 2
