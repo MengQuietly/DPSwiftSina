@@ -24,10 +24,17 @@ class MQHomeController: MQBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.whiteColor()
+        
         if !MQAccountViewModel.shareAccount.userLogon {
             visitorView?.setupInfo(nil, message: "关注一些人，回这里看看有惊喜")
             return
         }
+        
+        prepareTableView()
+    }
+    
+    private func prepareTableView(){
         // 注册重用 cell
         tableView.registerClass(MQStatusNomalCell.self, forCellReuseIdentifier: MQStatusNomalCellID)
         tableView.registerClass(MQStatusForwardCell.self, forCellReuseIdentifier: MQStatusForwardCellID)
@@ -40,18 +47,29 @@ class MQHomeController: MQBaseTableViewController {
         // 取消分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         
+        // 准备下拉刷新控件 － 刷新控件的高度是 60 点
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(loadWeiboList), forControlEvents: UIControlEvents.ValueChanged)
+        
         loadWeiboList()
     }
     
     /// 加载微博数据
     func loadWeiboList() {
         
+        // beginRefreshing只会播放刷新动画，不会加载数据
+        refreshControl?.beginRefreshing()
+        
         statusesListModel.loadStatuses().subscribeNext({ (result) in
             // TODO:
             }, error: { (error) in
+                // 关闭刷新控件
+                self.refreshControl?.endRefreshing()
                 printLog("首页加载微博数据失败", logError: true)
                 SVProgressHUD.showInfoWithStatus("您的网络不给力！")
-            }) { 
+            }) {
+                // 关闭刷新控件
+                self.refreshControl?.endRefreshing()
                 // 刷新表格
                 self.tableView.reloadData()
         }

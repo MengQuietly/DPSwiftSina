@@ -49,7 +49,7 @@ class MQStatusListModel: NSObject {
                 
                 // 添加尾随闭包
                 self?.cacheWebImage(arrayM as! [MQStatusViewModel]){
-                    self?.statusList += arrayM
+                    self?.statusList = arrayM
                     
                     printLog("字典转模型后数组：\(self?.statusList)")
                     
