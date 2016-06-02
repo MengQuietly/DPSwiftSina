@@ -39,6 +39,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="pullRefreshImg" destination="VPy-dH-Jdi" id="437-jN-NaX"/>
+            </connections>
             <point key="canvasLocation" x="449" y="-429"/>
         </view>
     </objects>
