@@ -29,6 +29,7 @@ class MQHomeController: MQBaseTableViewController {
         }
         
         prepareTableView()
+        loadWeiboList()
     }
     
     private func prepareTableView(){
@@ -38,8 +39,8 @@ class MQHomeController: MQBaseTableViewController {
         
         // 以下两句就可以自动处理行高，条件：
         // 提示：如果不使用自动计算行高，UITableViewAutomaticDimension，一定不要设置底部约束（需去除 statusBottomView 约束）
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight = 300 // UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
+//        tableView.rowHeight = 300 // UITableViewAutomaticDimension
         
         // 取消分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
@@ -47,10 +48,7 @@ class MQHomeController: MQBaseTableViewController {
         // 准备下拉刷新控件 － 刷新控件的高度是 60 点
         refreshControl = MQRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadWeiboList), forControlEvents: UIControlEvents.ValueChanged)
-        
-        loadWeiboList()
-        
-        pullUpRefreshView.startAnimating()
+
         // 上拉提示控件
         tableView.tableFooterView = pullUpRefreshView
     }
@@ -61,19 +59,27 @@ class MQHomeController: MQBaseTableViewController {
         // beginRefreshing只会播放刷新动画，不会加载数据
         refreshControl?.beginRefreshing()
         
-        statusesListModel.loadStatuses().subscribeNext({ (result) in
+        statusesListModel.loadStatuses(isPullupRefresh: pullUpRefreshView.isAnimating()).subscribeNext({ (result) in
             // TODO:
             }, error: { (error) in
-                // 关闭刷新控件
-                self.refreshControl?.endRefreshing()
+                // 结束刷新数据
+                self.endLoadData()
                 printLog("首页加载微博数据失败", logError: true)
                 SVProgressHUD.showInfoWithStatus("您的网络不给力！")
             }) {
-                // 关闭刷新控件
-                self.refreshControl?.endRefreshing()
+                // 结束刷新数据
+                self.endLoadData()
                 // 刷新表格
                 self.tableView.reloadData()
         }
+    }
+    
+    /// 结束刷新数据
+    private func endLoadData() {
+        // 关闭刷新控件
+        self.refreshControl?.endRefreshing()
+        // 关闭上拉刷新动画
+        self.pullUpRefreshView.stopAnimating()
     }
     
     // MARK: - 懒加载控件
@@ -115,9 +121,16 @@ extension MQHomeController{
         // 2. 设置数据
         cell.statusViewModel = viewModel
         
+        // 3. 判断当前的 indexPath 是否是数组的最后一项，如果是，开始上拉动画
+        
+        printLog("显示上拉视图-----\(indexPath.row),\(statusesListModel.statusList.count)")
+        
         if (indexPath.row == statusesListModel.statusList.count - 1) && !pullUpRefreshView.isAnimating(){
-            printLog("显示上拉视图")
+            
+            printLog("进入--------------------显示上拉视图")
             pullUpRefreshView.startAnimating()
+            // 开始刷新数据
+            loadWeiboList()
         }
         
         // 3. 返回 cell

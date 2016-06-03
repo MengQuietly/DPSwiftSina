@@ -26,8 +26,6 @@ class MQRefreshControl: UIRefreshControl {
     // 越向下 y 越小，小到一定程度，自动进入刷新状态
     // 越向上推动表格，y值越大，刷新控件始终在视图上
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-     
-        printLog("-----frame:\(frame)")
         
         // 判断是否是上拉（上拉不反应）
         if frame.origin.y > 0 {
@@ -62,7 +60,7 @@ class MQRefreshControl: UIRefreshControl {
     }
     
     required init?(coder aDecoder: NSCoder) {        
-        super.init(coder: aDecoder)
+        super.init() // coder: aDecoder
 
         setUpUI()
     }

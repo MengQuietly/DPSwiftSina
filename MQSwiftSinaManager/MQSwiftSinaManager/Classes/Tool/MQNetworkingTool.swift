@@ -32,13 +32,23 @@ class MQNetworkingTool: AFHTTPSessionManager {
     }()
     
     // MARK: - 微博数据
-    /// 获取当前登录用户及其所关注（授权）用户的最新微博
+    /// 获取当前登录用户及其所关注（授权）用户的最新微博(加载微博数据)
     ///
     /// 使用一下 可在调用时直接点击链接进去查看
     /// - see: [http://open.weibo.com/wiki/2/statuses/home_timeline](http://open.weibo.com/wiki/2/statuses/home_timeline)
-    /// @return <#return value description#>
-    func loadAccountNewsWeiboContent() -> RACSignal {
-        return request(.GET, URLString:readNewWeiBoURL , parameter: nil)
+    /// - parameter since_id:   若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0
+    /// - parameter max_id:     若指定此参数，则返回ID小于或等于max_id的微博，默认为0，id越大，微博越新。
+    /// @return
+    func loadAccountNewsWeiboContent(since_id since_id: Int, max_id: Int) -> RACSignal {
+        
+        var params = [String: AnyObject]()
+        
+        if since_id > 0 {
+            params["since_id"] = since_id
+        } else if max_id > 0 {
+            params["max_id"] = max_id - 1
+        }
+        return request(.GET, URLString:readNewWeiBoURL , parameter: params)
     }
     
     // MARK: - OAuth 授权 URL

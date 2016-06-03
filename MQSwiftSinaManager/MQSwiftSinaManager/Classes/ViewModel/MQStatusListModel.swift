@@ -16,15 +16,25 @@ class MQStatusListModel: NSObject {
     // 微博数据数组 － AnyObject 原因不详
     lazy var statusList:[AnyObject] = [MQStatusViewModel]()
     
-    // 加载微博数据
-    func loadStatuses() -> RACSignal {
+    /// 加载微博数据
+    /// - parameter isPullupRefresh: 是否上拉刷新标记
+    func loadStatuses(isPullupRefresh isPullupRefresh: Bool) -> RACSignal {
+        
+        var since_id = (statusList.count ?? 0) == 0 ? 0 : (statusList.first as! MQStatusViewModel).statusInfo.id
+        var max_id = 0
+        
+        // 上拉刷新: 取 statuses 的最后一项的 id 作为 max_id
+        if isPullupRefresh {
+            since_id = 0
+            max_id = (statusList.last as! MQStatusViewModel).statusInfo.id
+        }
         
         // RACSignal 在订阅的时候，会对 self 进行强引用，sendCompleted 说明信号完成，会释放对 self 的强引用
         // 以下代码不存在循环引用，但是为了保险，可以使用 [weak self] 防范！
         return RACSignal.createSignal({ [weak self](subscriber) -> RACDisposable! in
             
             // 网络工具，执行的时候，会对 self 进行强引用，网络访问结束后，后对 self 的引用释放！
-            MQNetworkingTool.shareManager.loadAccountNewsWeiboContent().subscribeNext({ (result) in
+            MQNetworkingTool.shareManager.loadAccountNewsWeiboContent(since_id: since_id, max_id: max_id).subscribeNext({ (result) in
                 
                 let datas = result as! NSDictionary
             
@@ -32,6 +42,7 @@ class MQStatusListModel: NSObject {
                 guard let statusArray = datas["statuses"] as? [[String: AnyObject]] else{
                     
                     printLog("加载微博数据接口：没有正确的数据")
+                    subscriber.sendError(NSError(domain: "com.mengQuietly.error", code: -1002, userInfo: ["error message": "没有正确数据"]))
                     return
                 }
                 
@@ -47,11 +58,20 @@ class MQStatusListModel: NSObject {
                     arrayM.append(MQStatusViewModel(statusInfos: MQStatusInfo(dict: dict)))
                 }
                 
+                printLog("刷新到 \(arrayM.count) 条微博")
+                
                 // 添加尾随闭包
                 self?.cacheWebImage(arrayM as! [MQStatusViewModel]){
-                    self?.statusList = arrayM
                     
-                    printLog("字典转模型后数组：\(self?.statusList)")
+                    // 将新数据拼接在现有数组的末尾(上拉刷新)
+                    if max_id > 0 {
+                        self?.statusList += arrayM
+                    } else {
+                        // 初始刷新（下拉刷新）
+                        self?.statusList = arrayM + self!.statusList
+                    }
+                    
+                    printLog("字典转模型后数组：\(self?.statusList.count)")
                     
                     // 3.通知调用方
                     subscriber.sendCompleted()
@@ -72,11 +92,11 @@ class MQStatusListModel: NSObject {
     /// - parameter finished: 完成回调
     private func cacheWebImage(array: [MQStatusViewModel],finished:()->()){
         
-        // 记录缓存图像大小
-        var imgDataLength = 0
         
         // 1>调度组
         let groups = dispatch_group_create()
+        // 记录缓存图像大小
+        var imgDataLength = 0
         
         // 遍历视图模型数组
         for viewModel in array {
@@ -103,15 +123,13 @@ class MQStatusListModel: NSObject {
                 dispatch_group_leave(groups)
             })
             
-            // 4>调度组监听
-            dispatch_group_notify(groups, dispatch_get_main_queue(), { 
-                printLog("缓存完成:\(NSHomeDirectory()),大小：\(imgDataLength/1024) K")
-                
-                // 执行闭包
-                finished()
-            })
+        }
+        // 4>调度组监听
+        dispatch_group_notify(groups, dispatch_get_main_queue()) { 
+            printLog("缓存完成:\(NSHomeDirectory()),大小：\(imgDataLength/1024) K")
             
-            printLog("－－－－－－调度组后：\(viewModel.thumbnailURLs)")
+            // 执行闭包
+            finished()
         }
     }
 }
