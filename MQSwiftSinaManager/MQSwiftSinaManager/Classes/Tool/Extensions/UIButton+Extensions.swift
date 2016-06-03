@@ -9,15 +9,16 @@
 import UIKit
 
 // MARK: - UIButton 分类
-/// 便利构造函数
-///
-/// - parameter title:     title
-/// - parameter imageName: imageName
-/// - parameter color:     color
-/// - parameter fontSize:  fontSize
-///
-/// - returns: UIButton
 extension UIButton{
+    
+    /// 便利构造函数
+    ///
+    /// - parameter title:     title
+    /// - parameter imageName: imageName
+    /// - parameter color:     color
+    /// - parameter fontSize:  fontSize
+    ///
+    /// - returns: UIButton
      convenience init(title: String, imageName: String, color: UIColor, fontSize: CGFloat){
         self.init()
         setTitle(title, forState: UIControlState.Normal)
@@ -26,4 +27,18 @@ extension UIButton{
         
         titleLabel?.font = UIFont.systemFontOfSize(fontSize)
     }
+    
+    /// 便利构造函数
+    ///
+    /// - parameter imageName: imageName
+    ///
+    /// - returns: 带 高亮图片的 btn
+    convenience init(imageName: String){
+        self.init()
+        
+        setImage(UIImage(named: imageName), forState: UIControlState.Normal)
+        setImage(UIImage(named: imageName + "_highlighted"), forState: UIControlState.Highlighted)
+        sizeToFit()
+    }
+
 }

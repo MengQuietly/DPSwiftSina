@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 发布微博
 class MQComposeController: UIViewController {
     
     override func viewDidLoad() {
@@ -36,8 +37,44 @@ class MQComposeController: UIViewController {
     /// 专门来创建界面的函数
     override func loadView() {
         view = UIView()
-        view.backgroundColor = UIColor.redColor()
+        view.backgroundColor = UIColor.whiteColor()
         prepareNavBar()
+        prepareToolBar()
+    }
+    
+    /// 设置工具栏
+    private func prepareToolBar() {
+        view.addSubview(toolBars)
+        
+        let toolBarIconArray = [
+            ["toobarIconName":"compose_toolbar_picture","toolBarBtnAction":"pictureBarBtnClick"],
+            ["toobarIconName":"compose_toolbar_mention","toolBarBtnAction":"mentionBarBtnClick"],
+            ["toobarIconName":"compose_toolbar_trend","toolBarBtnAction":"trendBarBtnClick"],
+            ["toobarIconName":"compose_toolbar_emoticon","toolBarBtnAction":"emoticonBarBtnClick"],
+            ["toobarIconName":"compose_toolbar_more","toolBarBtnAction":"moreBarBtnClick"]
+        ]
+        
+        toolBars.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: 44))
+        
+        // 添加按钮 Array
+        var btnItems = [UIBarButtonItem]()
+        
+        for dict in toolBarIconArray {
+            printLog("\(dict["toobarIconName"]!)")
+            
+            let iconBtn = UIButton(imageName: dict["toobarIconName"]!)
+            
+            if let toolBarBtnActionName = dict["toolBarBtnAction"] {
+                iconBtn.addTarget(self, action: Selector(toolBarBtnActionName), forControlEvents: UIControlEvents.TouchUpInside)
+            }
+            
+            // 添加 toolbar 的 item
+            btnItems.append(UIBarButtonItem(customView: iconBtn))
+            // 添加 toolbar 的 item 间的弹簧间距
+            btnItems.append(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil))
+        }
+        btnItems.removeLast()
+        toolBars.items = btnItems
     }
     
     // MARK: - 监听方法
@@ -50,8 +87,36 @@ class MQComposeController: UIViewController {
     @objc private func sendNavBarBtnClick(){
         printLog("发送微博")
     }
+    
+    /// 选择照片
+    @objc private func pictureBarBtnClick(){
+        printLog("选择照片")
+    }
+    
+    /// @ 好友
+    @objc private func mentionBarBtnClick(){
+        printLog("@ 好友")
+    }
+    
+    /// 选择 热门
+    @objc private func trendBarBtnClick(){
+        printLog("选择热门")
+    }
+    
+    /// 选择表情
+    @objc private func emoticonBarBtnClick(){
+        printLog("选择 表情")
+    }
+    
+    /// 更多
+    @objc private func moreBarBtnClick(){
+        printLog("选择更多")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    // MARK: - 懒加载控件
+    private lazy var toolBars = UIToolbar()
 }
