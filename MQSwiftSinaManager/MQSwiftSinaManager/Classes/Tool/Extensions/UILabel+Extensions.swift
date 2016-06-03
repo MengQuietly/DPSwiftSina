@@ -31,6 +31,7 @@ extension UILabel{
             preferredMaxLayoutWidth = layoutWidth
             numberOfLines = 0
         }
+        sizeToFit()
     }
 }
 
