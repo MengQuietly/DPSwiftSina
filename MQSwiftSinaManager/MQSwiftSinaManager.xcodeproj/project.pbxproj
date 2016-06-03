@@ -27,6 +27,7 @@
 		09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */; };
 		09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A701CEEBF8800726AD1 /* MQDiscoverController.swift */; };
 		09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A721CEEBF9A00726AD1 /* MQProfileController.swift */; };
+		09C5DCC91D0163AE0072FA7E /* MQComposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */; };
 		09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */; };
 		09DA0AD01CEC75EE0037C88F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */; };
 		09DA0ADE1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0ADD1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift */; };
@@ -82,6 +83,7 @@
 		09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQMessageController.swift; sourceTree = "<group>"; };
 		09760A701CEEBF8800726AD1 /* MQDiscoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQDiscoverController.swift; sourceTree = "<group>"; };
 		09760A721CEEBF9A00726AD1 /* MQProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQProfileController.swift; sourceTree = "<group>"; };
+		09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQComposeController.swift; sourceTree = "<group>"; };
 		09DA0AC51CEC75EE0037C88F /* MQSwiftSinaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQSwiftSinaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				0938DABB1CF7ECA100E3A8CD /* NewFeature */,
 				09760A4D1CEEB19F00726AD1 /* OAuth */,
 				09760A4B1CEEB19F00726AD1 /* Main */,
+				09C5DCC71D0163870072FA7E /* Compose */,
 				09760A491CEEB19F00726AD1 /* Discover */,
 				09760A4A1CEEB19F00726AD1 /* Home */,
 				09760A4C1CEEB19F00726AD1 /* Message */,
@@ -290,6 +293,14 @@
 			);
 			name = "ViewModel(视图模型)";
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		09C5DCC71D0163870072FA7E /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */,
+			);
+			path = Compose;
 			sourceTree = "<group>";
 		};
 		09DA0ABC1CEC75EE0037C88F = {
@@ -547,6 +558,7 @@
 				0938DABD1CF7ECCB00E3A8CD /* MQNewFeatureController.swift in Sources */,
 				09760A711CEEBF8800726AD1 /* MQDiscoverController.swift in Sources */,
 				0936B53D1CFEC61B00AE202E /* MQStatusNomalCell.swift in Sources */,
+				09C5DCC91D0163AE0072FA7E /* MQComposeController.swift in Sources */,
 				0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */,
 				09E1A6EF1CEEFA9D009DF2B8 /* MQNetworkingTool.swift in Sources */,
 				09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */,

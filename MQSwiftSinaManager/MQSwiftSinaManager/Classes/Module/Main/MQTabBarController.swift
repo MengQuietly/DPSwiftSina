@@ -88,6 +88,17 @@ class MQTabBarController: UITabBarController {
     /// @objc 关键字能够保证运行循环能够调用，走的 oc 的消息机制，调用之前不再判断方法是否存在,和 private 联用，就能够做到对方法的保护
     @objc private func composeBtnClick(){
         printLog(#function)
+        
+        // 常量有一次设值机会
+        let perVC: UIViewController
+        if MQAccountViewModel.shareAccount.userLogon {
+            perVC = MQComposeController()
+        }else{
+            perVC = MQOAuthController()
+        }
+        let nav = UINavigationController(rootViewController: perVC)
+        presentViewController(nav, animated: true, completion: nil)
+        
     }
 
     override func didReceiveMemoryWarning() {
