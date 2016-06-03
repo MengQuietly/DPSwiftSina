@@ -73,6 +73,12 @@ class MQStatusListModel: NSObject {
                     
                     printLog("字典转模型后数组：\(self?.statusList.count)")
                     
+                    // 如果是下拉刷新，提示用户
+                    if since_id > 0 {
+                        // RAC 是 OC 的，通知订阅者，下拉刷新的数据
+                        subscriber.sendNext(arrayM.count)
+                    }
+                    
                     // 3.通知调用方
                     subscriber.sendCompleted()
                 }

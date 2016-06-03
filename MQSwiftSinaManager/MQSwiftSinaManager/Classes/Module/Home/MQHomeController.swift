@@ -60,7 +60,13 @@ class MQHomeController: MQBaseTableViewController {
         refreshControl?.beginRefreshing()
         
         statusesListModel.loadStatuses(isPullupRefresh: pullUpRefreshView.isAnimating()).subscribeNext({ (result) in
-            // TODO:
+            
+            // 使用 RAC 传递的数值，是一 NSNumber 形式传递的
+            let pullRefreshDownCount = (result as! NSNumber).integerValue
+            // 展示tip 提示视图
+            if pullRefreshDownCount > 0 {
+                self.showPullDownRefreshCountTips(pullRefreshDownCount)
+            }
             }, error: { (error) in
                 // 结束刷新数据
                 self.endLoadData()
@@ -71,6 +77,30 @@ class MQHomeController: MQBaseTableViewController {
                 self.endLoadData()
                 // 刷新表格
                 self.tableView.reloadData()
+        }
+    }
+    
+    /// 显示下拉条数提示
+    ///
+    /// - parameter count: 下拉的条数
+    /// 提示：NavBar, TabBar, ToolBar 不能使用自动布局
+    /// 不要疯狂下拉刷新！一旦 403 可以更换 App ID
+    private func showPullDownRefreshCountTips(count: Int){
+        printLog("显示下拉条数提示：\(count)")
+        
+        let pullDownTipLabelTitle = "\(count) 条新微博"
+        let pullDownTipLabelH: CGFloat = 44
+        let pullDownTipLabelY: CGFloat = pullDownTipLabelH + 20
+        let pullDownTipLabelRect = CGRect(x: 0, y: -pullDownTipLabelY, width: MQAppWith, height: pullDownTipLabelH)
+        pullDownRefreshTipView.text = pullDownTipLabelTitle
+        pullDownRefreshTipView.frame = pullDownTipLabelRect
+        
+        UIView.animateWithDuration(1.3, animations: {
+            self.pullDownRefreshTipView.frame = CGRectOffset(pullDownTipLabelRect, 0, pullDownTipLabelY + pullDownTipLabelH)
+        }) { (_) in
+            UIView.animateWithDuration(1.2) {
+                self.pullDownRefreshTipView.frame = pullDownTipLabelRect
+            }
         }
     }
     
@@ -86,6 +116,16 @@ class MQHomeController: MQBaseTableViewController {
     /// 微博列表视图模型
     private lazy var statusesListModel = MQStatusListModel()
 
+    /// 下拉提示标签
+    private lazy var pullDownRefreshTipView: UILabel = {
+        let pullDownLabel = UILabel(title: nil, color: UIColor.whiteColor(), fontSize: 18)
+        pullDownLabel.backgroundColor = UIColor.orangeColor().colorWithAlphaComponent(0.75)
+        pullDownLabel.textAlignment = NSTextAlignment.Center
+        
+        self.navigationController?.navigationBar.insertSubview(pullDownLabel, atIndex: 0)
+        return pullDownLabel
+    }()
+    
     /// 上拉刷新视图
     private lazy var pullUpRefreshView: UIActivityIndicatorView = {
         let pullUpRefreshViews = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
@@ -122,12 +162,8 @@ extension MQHomeController{
         cell.statusViewModel = viewModel
         
         // 3. 判断当前的 indexPath 是否是数组的最后一项，如果是，开始上拉动画
-        
-        printLog("显示上拉视图-----\(indexPath.row),\(statusesListModel.statusList.count)")
-        
         if (indexPath.row == statusesListModel.statusList.count - 1) && !pullUpRefreshView.isAnimating(){
-            
-            printLog("进入--------------------显示上拉视图")
+    
             pullUpRefreshView.startAnimating()
             // 开始刷新数据
             loadWeiboList()
@@ -163,6 +199,5 @@ extension MQHomeController{
         
         // 2. 返回行高
         return viewModel.cellRowHeight
-        
     }
 }
