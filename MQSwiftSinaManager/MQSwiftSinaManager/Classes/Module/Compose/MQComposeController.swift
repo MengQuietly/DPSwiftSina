@@ -9,7 +9,14 @@
 import UIKit
 
 /// 发布微博
-class MQComposeController: UIViewController {
+class MQComposeController: UIViewController, UITextViewDelegate {
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        // 激活键盘
+        writeTxtView.becomeFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +26,7 @@ class MQComposeController: UIViewController {
     private func prepareNavBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(closeNavBarBtnClick))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发送", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(sendNavBarBtnClick))
+        navigationItem.rightBarButtonItem?.enabled = false
     
         let titleViews = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 32))
         let titleLabel = UILabel(title: "发布微博", color: UIColor.darkGrayColor(), fontSize: 15)
@@ -31,6 +39,15 @@ class MQComposeController: UIViewController {
         nameLabel.ff_AlignInner(type: ff_AlignType.BottomCenter, referView: titleViews, size: nil)
         
         navigationItem.titleView = titleViews
+    }
+    
+    // MARK: - UITextViewDelegate
+    func textViewDidChange(textView: UITextView) {
+        
+        // 是否有文本：显示 placeholder、发送按钮
+        placeholderLabel.hidden = textView.hasText()
+        navigationItem.rightBarButtonItem?.enabled = textView.hasText()
+        
     }
     
     // MARK: - 创建界面
@@ -90,6 +107,9 @@ class MQComposeController: UIViewController {
     // MARK: - 监听方法
     /// 取消发送微博
     @objc private func closeNavBarBtnClick(){
+        // 关闭键盘
+        writeTxtView.resignFirstResponder()
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -131,12 +151,15 @@ class MQComposeController: UIViewController {
     /// 文本视图
     private lazy var writeTxtView: UITextView = {
         let writeContentView = UITextView()
+        writeContentView.delegate = self
         writeContentView.backgroundColor = UIColor.redColor()
-        writeContentView.text = "分享新鲜事"
+//        writeContentView.text = "分享新鲜事"
         writeContentView.textColor = UIColor.darkGrayColor()
         writeContentView.font = UIFont.systemFontOfSize(19)
         // 允许垂直拖拽
         writeContentView.alwaysBounceVertical = true
+        // 拖拽 txtView 关闭键盘
+        writeContentView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
         return writeContentView
         
     }()
