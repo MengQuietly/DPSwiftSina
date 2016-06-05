@@ -11,6 +11,9 @@ import UIKit
 /// 发布微博
 class MQComposeController: UIViewController, UITextViewDelegate {
     
+    /// 工具栏底部约束
+    private var toolbarBottomCons: NSLayoutConstraint?
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -20,6 +23,31 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MQComposeController.keyBoardChange(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    // 注销通知
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    /// 键盘变化监听方法
+    @objc private func keyBoardChange(noti: NSNotification) {
+        
+        printLog(noti)
+        
+        // 获取最终的frame － OC 中将结构体保存在字典中，存成 NSValue
+        let rect = noti.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue
+        // 获取动画时长
+        let duration = noti.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue
+        
+        toolbarBottomCons?.constant = -MQAppHeight + rect.origin.y
+        
+        // 动画
+        UIView.animateWithDuration(duration) { 
+            self.view.layoutIfNeeded()
+        }
     }
     
     /// 设置导航栏
@@ -70,7 +98,7 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         // topLayoutGuide 能够自动判断顶部的控件(状态栏/navbar)
         let viewDict: [String: AnyObject] = ["top":topLayoutGuide,"tv":writeTxtView,"tb":toolBars]
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tv]-0-|", options: [], metrics: nil, views: viewDict))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[top]-0-[tv]-0-[tb]-0-|", options: [], metrics: nil, views: viewDict))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[top]-0-[tv]-0-[tb]", options: [], metrics: nil, views: viewDict))
         
         writeTxtView.addSubview(placeholderLabel)
         placeholderLabel.frame = CGRect(origin: CGPoint(x: 5, y: 8), size: placeholderLabel.bounds.size)
@@ -88,7 +116,13 @@ class MQComposeController: UIViewController, UITextViewDelegate {
             ["toobarIconName":"compose_toolbar_more","toolBarBtnAction":"moreBarBtnClick"]
         ]
         
-        toolBars.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: 44))
+        let cons = toolBars.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: 44))
+        
+        // 记录底部约束
+        toolbarBottomCons = toolBars.ff_Constraint(cons, attribute: NSLayoutAttribute.Bottom)
+        
+        // 确认获得约束
+        printLog("获取约束：\(toolbarBottomCons)")
         
         // 添加按钮 Array
         var btnItems = [UIBarButtonItem]()
