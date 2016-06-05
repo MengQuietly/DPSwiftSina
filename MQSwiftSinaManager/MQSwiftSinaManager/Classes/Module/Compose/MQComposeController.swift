@@ -40,6 +40,23 @@ class MQComposeController: UIViewController {
         view.backgroundColor = UIColor.whiteColor()
         prepareNavBar()
         prepareToolBar()
+        prepareTextView()
+    }
+    
+    /// 设置输入框
+    private func prepareTextView() {
+        view.addSubview(writeTxtView)
+        
+        // 自动布局
+        writeTxtView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // topLayoutGuide 能够自动判断顶部的控件(状态栏/navbar)
+        let viewDict: [String: AnyObject] = ["top":topLayoutGuide,"tv":writeTxtView,"tb":toolBars]
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tv]-0-|", options: [], metrics: nil, views: viewDict))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[top]-0-[tv]-0-[tb]-0-|", options: [], metrics: nil, views: viewDict))
+        
+        writeTxtView.addSubview(placeholderLabel)
+        placeholderLabel.frame = CGRect(origin: CGPoint(x: 5, y: 8), size: placeholderLabel.bounds.size)
     }
     
     /// 设置工具栏
@@ -111,5 +128,22 @@ class MQComposeController: UIViewController {
     }
     
     // MARK: - 懒加载控件
+    /// 文本视图
+    private lazy var writeTxtView: UITextView = {
+        let writeContentView = UITextView()
+        writeContentView.backgroundColor = UIColor.redColor()
+        writeContentView.text = "分享新鲜事"
+        writeContentView.textColor = UIColor.darkGrayColor()
+        writeContentView.font = UIFont.systemFontOfSize(19)
+        // 允许垂直拖拽
+        writeContentView.alwaysBounceVertical = true
+        return writeContentView
+        
+    }()
+    
+    /// 占位标签
+    private lazy var placeholderLabel = UILabel(title: "分享新鲜事", color: UIColor.lightGrayColor(), fontSize: 18)
+        
+    /// 工具栏
     private lazy var toolBars = UIToolbar()
 }
