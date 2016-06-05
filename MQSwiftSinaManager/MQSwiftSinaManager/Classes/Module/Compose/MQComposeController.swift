@@ -60,16 +60,9 @@ class MQComposeController: UIViewController {
         var btnItems = [UIBarButtonItem]()
         
         for dict in toolBarIconArray {
-            printLog("\(dict["toobarIconName"]!)")
-            
-            let iconBtn = UIButton(imageName: dict["toobarIconName"]!)
-            
-            if let toolBarBtnActionName = dict["toolBarBtnAction"] {
-                iconBtn.addTarget(self, action: Selector(toolBarBtnActionName), forControlEvents: UIControlEvents.TouchUpInside)
-            }
             
             // 添加 toolbar 的 item
-            btnItems.append(UIBarButtonItem(customView: iconBtn))
+            btnItems.append(UIBarButtonItem(imageName: dict["toobarIconName"]!, target: self, actionName: dict["toolBarBtnAction"]))
             // 添加 toolbar 的 item 间的弹簧间距
             btnItems.append(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil))
         }
