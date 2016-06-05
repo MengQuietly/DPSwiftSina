@@ -29,6 +29,7 @@
 		09760A731CEEBF9A00726AD1 /* MQProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A721CEEBF9A00726AD1 /* MQProfileController.swift */; };
 		09C5DCC91D0163AE0072FA7E /* MQComposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */; };
 		09C5DCCD1D01A49F0072FA7E /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C5DCCC1D01A49F0072FA7E /* UIBarButtonItem+Extensions.swift */; };
+		09CB0CCC1D04257400C866A6 /* MQPictureSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CB0CCB1D04257400C866A6 /* MQPictureSelectorController.swift */; };
 		09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */; };
 		09DA0AD01CEC75EE0037C88F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */; };
 		09DA0ADE1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA0ADD1CEC75EE0037C88F /* MQSwiftSinaManagerTests.swift */; };
@@ -86,6 +87,7 @@
 		09760A721CEEBF9A00726AD1 /* MQProfileController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQProfileController.swift; sourceTree = "<group>"; };
 		09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQComposeController.swift; sourceTree = "<group>"; };
 		09C5DCCC1D01A49F0072FA7E /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
+		09CB0CCB1D04257400C866A6 /* MQPictureSelectorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQPictureSelectorController.swift; sourceTree = "<group>"; };
 		09DA0AC51CEC75EE0037C88F /* MQSwiftSinaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQSwiftSinaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09DA0AC81CEC75EE0037C88F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09DA0ACF1CEC75EE0037C88F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -301,9 +303,18 @@
 		09C5DCC71D0163870072FA7E /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				09CB0CCA1D04254500C866A6 /* PictureSelector */,
 				09C5DCC81D0163AE0072FA7E /* MQComposeController.swift */,
 			);
 			path = Compose;
+			sourceTree = "<group>";
+		};
+		09CB0CCA1D04254500C866A6 /* PictureSelector */ = {
+			isa = PBXGroup;
+			children = (
+				09CB0CCB1D04257400C866A6 /* MQPictureSelectorController.swift */,
+			);
+			path = PictureSelector;
 			sourceTree = "<group>";
 		};
 		09DA0ABC1CEC75EE0037C88F = {
@@ -575,6 +586,7 @@
 				090DA5BF1CFBDE510009903A /* MQStatusCellWithBottomView.swift in Sources */,
 				09DA0AC91CEC75EE0037C88F /* AppDelegate.swift in Sources */,
 				09E1A6ED1CEEF915009DF2B8 /* MQOAuthController.swift in Sources */,
+				09CB0CCC1D04257400C866A6 /* MQPictureSelectorController.swift in Sources */,
 				09F73ACA1CFAE995003F857E /* UIView+AutoLayout.swift in Sources */,
 				09E1A6EB1CEEF60F009DF2B8 /* MQVisitorLoginView.swift in Sources */,
 				090DA5BB1CFBDCC40009903A /* MQStatusCell.swift in Sources */,
