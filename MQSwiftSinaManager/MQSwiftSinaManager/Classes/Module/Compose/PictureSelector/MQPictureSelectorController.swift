@@ -8,8 +8,10 @@
 
 import UIKit
 
-// 可重用标识符
+/// 可重用标识符
 private let MQPictureSelectorCellID = "MQPictureSelectorCellID"
+/// 最大选择照片数量
+private let MQChooseMaxPictureCount = 9
 
 // 照片选择器
 class MQPictureSelectorController: UICollectionViewController,MQPictureSelectorCellWithRemoveBtnDelegate {
@@ -17,8 +19,8 @@ class MQPictureSelectorController: UICollectionViewController,MQPictureSelectorC
     // MARK: - 懒加载控件
     /// 照片数组 - 数据源
     private lazy var choosePictureArray = [UIImage]()
-    
-    private lazy var currentChoosePicture = 0
+    /// 用户当前选中照片索引
+    private var currentChoosePicture = 0
     
     // MARK: - 搭建界面
     init() {
@@ -48,7 +50,7 @@ class MQPictureSelectorController: UICollectionViewController,MQPictureSelectorC
     // MARK: UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 至少要有一个按钮允许用户添加照片，如果达到最大数量限制，就不再添加
-        return choosePictureArray.count + 1
+        return choosePictureArray.count + (choosePictureArray.count == MQChooseMaxPictureCount ? 0 : 1)
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
