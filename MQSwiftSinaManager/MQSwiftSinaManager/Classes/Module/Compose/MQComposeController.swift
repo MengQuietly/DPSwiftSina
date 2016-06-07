@@ -81,6 +81,7 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     /// 专门来创建界面的函数
     override func loadView() {
         view = UIView()
+        automaticallyAdjustsScrollViewInsets = false
         view.backgroundColor = UIColor.whiteColor()
         prepareNavBar()
         prepareToolBar()
@@ -99,7 +100,9 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         addChildViewController(pictureSelectorVC)
         
         // 1. 添加视图
-        view.addSubview(pictureSelectorVC.view)
+        
+        // 将视图插入 toolbars 下面
+        view.insertSubview(pictureSelectorVC.view, belowSubview: toolBars)
         
         // 2. 自动布局
         pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: MQAppHeight * 0.6))
