@@ -13,6 +13,8 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     
     /// 工具栏底部约束
     private var toolbarBottomCons: NSLayoutConstraint?
+    /// 文本视图底部约束
+    private var textViewBottomCons: NSLayoutConstraint?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -118,7 +120,11 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         // topLayoutGuide 能够自动判断顶部的控件(状态栏/navbar)
         let viewDict: [String: AnyObject] = ["top":topLayoutGuide,"tv":writeTxtView,"tb":toolBars]
         view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[tv]-0-|", options: [], metrics: nil, views: viewDict))
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[top]-0-[tv]-0-[tb]", options: [], metrics: nil, views: viewDict))
+        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[top]-0-[tv]", options: [], metrics: nil, views: viewDict))
+        
+        // 定义 textView 和 toolbar 之间的约束 （替换上面 ‘V:|-0-[top]-0-[tv]-0-[tb]’）
+        textViewBottomCons = NSLayoutConstraint(item: writeTxtView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: toolBars, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
+        view.addConstraint(textViewBottomCons!)
         
         writeTxtView.addSubview(placeholderLabel)
         placeholderLabel.frame = CGRect(origin: CGPoint(x: 5, y: 8), size: placeholderLabel.bounds.size)
