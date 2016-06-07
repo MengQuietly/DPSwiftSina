@@ -57,8 +57,29 @@ class MQPictureSelectorController: UICollectionViewController, MQPictureSelector
         return cell
     }
     
+    /// 选择照片
+    /// Camera              相机
+    /// PhotoLibrary        照片库 － 包含相册，包括通过 iTunes / iPhoto 同步的照片，同步的照片不允许在手机删除
+    /// SavedPhotosAlbum    相册 － 相机拍摄，应用程序保存的图片，可以删除
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         printLog("---item:\(indexPath.item)")
+        
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            printLog("无法访问相册")
+            return
+        }
+        
+        
+        // 访问相册
+        let pickVC = UIImagePickerController()
+        
+        pickVC.delegate = self
+        // 允许编辑
+        //        pickVC.allowsEditing = true
+        
+        presentViewController(pickVC, animated: true, completion: nil)
+        
+
     }
     
     // MARK: - PictureSelectorCellDelegate
@@ -69,6 +90,30 @@ class MQPictureSelectorController: UICollectionViewController, MQPictureSelector
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+}
+
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension MQPictureSelectorController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    /// 选中照片代理方法
+    ///
+    /// - parameter picker:      picker 选择控制器
+    /// - parameter image:       选中的图像
+    /// - parameter editingInfo: 编辑字典，在开发选择用户头像时，格外有用！vc.allowsEditing = true
+    ///                          一旦允许编辑，选中的图像会小
+    ///
+    /// 一旦实现了代理方法，就需要自己关闭控制器
+    /// 凡事开发相册相关的应用，大多需要考虑内存的问题
+    /// UIImageJPEGRepresentation 会严重影响图片质量
+    /// 关于应用程序内存，UI的App空的程序运行占用 20M 左右，一个cocos2dx空模板建立应用程序运行会占 70M 内存
+    /// 一般程序消耗在 100M 以内都是可以接受的
+    /// 参考数据：在 5s 一次测试数据，一直 sdwebimage 加载网络图像
+    /// 内存飙升到 500M 接收到第一次内存警告！内存释放后的结果120M，程序仍然能够正常运行
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
 
 /// 照片 Cell closeBtn 协议
