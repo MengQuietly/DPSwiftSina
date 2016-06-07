@@ -14,6 +14,10 @@ private let MQPictureSelectorCellID = "MQPictureSelectorCellID"
 // 照片选择器
 class MQPictureSelectorController: UICollectionViewController, MQPictureSelectorCellWithRemoveBtnDelegate  {
 
+    // MARK: - 懒加载控件
+    /// 照片数组 - 数据源
+    private lazy var choosePictureArray = [UIImage]()
+    
     // MARK: - 搭建界面
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -44,13 +48,13 @@ class MQPictureSelectorController: UICollectionViewController, MQPictureSelector
     // MARK: UICollectionViewDataSource
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 10
+        // 至少要有一个按钮允许用户添加照片
+        return choosePictureArray.count + 1
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MQPictureSelectorCellID, forIndexPath: indexPath) as! MQPictureSelectorCell
         
-        cell.backgroundColor = UIColor.redColor()
         // 设置代理
         cell.pictureCloseDelegate = self
         
@@ -69,17 +73,15 @@ class MQPictureSelectorController: UICollectionViewController, MQPictureSelector
             return
         }
         
-        
         // 访问相册
         let pickVC = UIImagePickerController()
-        
+        // 监听照片选择
         pickVC.delegate = self
+        
         // 允许编辑
-        //        pickVC.allowsEditing = true
+//        pickVC.allowsEditing = true
         
         presentViewController(pickVC, animated: true, completion: nil)
-        
-
     }
     
     // MARK: - PictureSelectorCellDelegate
@@ -111,6 +113,11 @@ extension MQPictureSelectorController: UIImagePickerControllerDelegate, UINaviga
     /// 内存飙升到 500M 接收到第一次内存警告！内存释放后的结果120M，程序仍然能够正常运行
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
+        // 追加照片
+        choosePictureArray.append(image)
+        // 刷新视图
+        collectionView?.reloadData()
+        
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -127,6 +134,19 @@ private protocol MQPictureSelectorCellWithRemoveBtnDelegate: NSObjectProtocol {
 /// 照片选择 Cell
 private class MQPictureSelectorCell: UICollectionViewCell {
     
+    // 设置 ＋ 按钮图片
+    var chooseImages: UIImage?{
+        didSet{
+            
+            if chooseImages != nil {
+                pictureBtn.setImage(chooseImages, forState: .Normal)
+            } else {
+                // 显示默认的加号图片
+                pictureBtn.setImage(UIImage(named: "compose_pic_add"), forState: .Normal)
+            }
+        }
+    }
+
     /// 定义代理
     weak var pictureCloseDelegate: MQPictureSelectorCellWithRemoveBtnDelegate?
     
@@ -141,7 +161,6 @@ private class MQPictureSelectorCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setUpUI() {
         // 添加控件
         contentView.addSubview(pictureBtn)
@@ -154,7 +173,7 @@ private class MQPictureSelectorCell: UICollectionViewCell {
         let viewDict = ["btn":removeButton]
         contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[btn]-0-|", options: [], metrics: nil, views: viewDict))
         
-        contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[btn]", options: [], metrics: nil, views: viewDict))
+    contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[btn]", options: [], metrics: nil, views: viewDict))
         
         // 禁用 照片选择按钮 - 就可以触发 collectionView 的 didSelected 代理方法
         // 禁用按钮有一个损失：不会再显示高亮图像
