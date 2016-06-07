@@ -129,13 +129,16 @@ extension MQPictureSelectorController: UIImagePickerControllerDelegate, UINaviga
     /// 内存飙升到 500M 接收到第一次内存警告！内存释放后的结果120M，程序仍然能够正常运行
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
+        // 缩放图片（解决内存暴增问题）
+        let chooseImgWithScaleImg = image.scaleImageToWidth(300)
+        
         // 用户是否选中了“＋”照片
         if currentChoosePicture < choosePictureArray.count {
             // 替换当前选中的图片
-            choosePictureArray[currentChoosePicture] = image
+            choosePictureArray[currentChoosePicture] = chooseImgWithScaleImg
         }else{
             // 追加照片
-            choosePictureArray.append(image)
+            choosePictureArray.append(chooseImgWithScaleImg)
         }
         // 刷新视图
         collectionView?.reloadData()

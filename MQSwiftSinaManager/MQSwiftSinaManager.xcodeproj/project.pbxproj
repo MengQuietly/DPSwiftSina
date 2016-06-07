@@ -22,6 +22,7 @@
 		0938DA6E1CF58A7700E3A8CD /* MQAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */; };
 		0938DA701CF5C82C00E3A8CD /* MQAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */; };
 		0938DABD1CF7ECCB00E3A8CD /* MQNewFeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */; };
+		096E6A071D06AF16006EAD35 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096E6A061D06AF16006EAD35 /* UIImage+Extensions.swift */; };
 		09760A6B1CEEBEEF00726AD1 /* MQBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */; };
 		09760A6D1CEEBF6400726AD1 /* MQHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */; };
 		09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */; };
@@ -80,6 +81,7 @@
 		0938DA6D1CF58A7700E3A8CD /* MQAccountInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountInfo.swift; sourceTree = "<group>"; };
 		0938DA6F1CF5C82C00E3A8CD /* MQAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQAccountViewModel.swift; sourceTree = "<group>"; };
 		0938DABC1CF7ECCB00E3A8CD /* MQNewFeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQNewFeatureController.swift; sourceTree = "<group>"; };
+		096E6A061D06AF16006EAD35 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		09760A6A1CEEBEEF00726AD1 /* MQBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQBaseTableViewController.swift; sourceTree = "<group>"; };
 		09760A6C1CEEBF6400726AD1 /* MQHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQHomeController.swift; sourceTree = "<group>"; };
 		09760A6E1CEEBF7900726AD1 /* MQMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQMessageController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		090DA5B61CFBDB100009903A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				096E6A061D06AF16006EAD35 /* UIImage+Extensions.swift */,
 				090DA5B81CFBDB810009903A /* UILabel+Extensions.swift */,
 				090DA5C41CFC44900009903A /* UIButton+Extensions.swift */,
 				09C5DCCC1D01A49F0072FA7E /* UIBarButtonItem+Extensions.swift */,
@@ -598,6 +601,7 @@
 				09F73AC41CF866DB003F857E /* MQWelomeController.swift in Sources */,
 				09760A6F1CEEBF7900726AD1 /* MQMessageController.swift in Sources */,
 				090DA5C31CFC18D50009903A /* MQStatusViewModel.swift in Sources */,
+				096E6A071D06AF16006EAD35 /* UIImage+Extensions.swift in Sources */,
 				090DA5C51CFC44900009903A /* UIButton+Extensions.swift in Sources */,
 				0936B53B1CFE91A800AE202E /* MQStatusForwardCell.swift in Sources */,
 			);
