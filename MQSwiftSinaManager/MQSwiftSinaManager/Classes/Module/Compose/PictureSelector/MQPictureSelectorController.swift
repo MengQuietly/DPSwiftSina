@@ -208,6 +208,9 @@ private class MQPictureSelectorCell: UICollectionViewCell {
         
         // 添加监听方法
         removeButton.addTarget(self, action: #selector(removeButtonClick), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        // （过宽的图经过缩放后会出现压瘪问题解决）通过修改 imageView 才能够修改按钮的 contentMode
+        pictureBtn.imageView!.contentMode = UIViewContentMode.ScaleAspectFill
     }
     
     /// 点击删除按钮事件
