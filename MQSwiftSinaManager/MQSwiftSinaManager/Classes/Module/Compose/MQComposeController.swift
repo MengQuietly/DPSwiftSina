@@ -15,6 +15,8 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     private var toolbarBottomCons: NSLayoutConstraint?
     /// 文本视图底部约束
     private var textViewBottomCons: NSLayoutConstraint?
+    /// 照片选择视图的高度约束
+    private var pictureViewHeightCons: NSLayoutConstraint?
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -107,7 +109,10 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         view.insertSubview(pictureSelectorVC.view, belowSubview: toolBars)
         
         // 2. 自动布局
-        pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: MQAppHeight * 0.6))
+        let pictureCons = pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: MQAppHeight * 0.6))
+        // 几率照片视图高度约束
+        pictureViewHeightCons = pictureSelectorVC.view.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
+        printLog("pictureViewHeightCons = \(pictureViewHeightCons)")
     }
     
     /// 设置输入框
@@ -181,6 +186,14 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     /// 选择照片
     @objc private func pictureBarBtnClick(){
         printLog("选择照片")
+        
+        // 1.删除文本视图和 toolbar 之前约束
+        view.removeConstraint(textViewBottomCons!)
+        
+        // 2.设置文本视图和 pictureSelect 之间约束
+        textViewBottomCons = NSLayoutConstraint(item: writeTxtView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: pictureSelectorVC.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
+        view.addConstraint(textViewBottomCons!)
+        
     }
     
     /// @ 好友
