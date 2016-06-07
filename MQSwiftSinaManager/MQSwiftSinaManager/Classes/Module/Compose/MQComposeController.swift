@@ -20,8 +20,12 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        // 激活键盘
-        writeTxtView.becomeFirstResponder()
+        
+        // 判断若用户已选择了照片，就不再激活键盘
+        if pictureViewHeightCons?.constant == 0 {
+            // 激活键盘
+            writeTxtView.becomeFirstResponder()
+        }
     }
     
     override func viewDidLoad() {
@@ -109,7 +113,7 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         view.insertSubview(pictureSelectorVC.view, belowSubview: toolBars)
         
         // 2. 自动布局
-        let pictureCons = pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: MQAppHeight * 0.6))
+        let pictureCons = pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: 0))
         // 几率照片视图高度约束
         pictureViewHeightCons = pictureSelectorVC.view.ff_Constraint(pictureCons, attribute: NSLayoutAttribute.Height)
         printLog("pictureViewHeightCons = \(pictureViewHeightCons)")
@@ -193,6 +197,17 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         // 2.设置文本视图和 pictureSelect 之间约束
         textViewBottomCons = NSLayoutConstraint(item: writeTxtView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: pictureSelectorVC.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0)
         view.addConstraint(textViewBottomCons!)
+        
+        // 3.重新设置 pictureView 高度约束
+        pictureViewHeightCons?.constant = MQAppHeight * 0.6
+        
+        // 4.关闭键盘
+        writeTxtView.resignFirstResponder()
+        
+        // 5.动画更新约束
+        UIView.animateWithDuration(0.25) {
+            self.view.layoutIfNeeded()
+        }
         
     }
     
