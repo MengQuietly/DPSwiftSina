@@ -41,7 +41,7 @@ class MQPictureSelectorController: UICollectionViewController,MQPictureSelectorC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.backgroundColor = UIColor.whiteColor()
+        collectionView?.backgroundColor = UIColor(white: 0.97, alpha: 1.0)
         
         // 注册可重用 cell
         self.collectionView!.registerClass(MQPictureSelectorCell.self, forCellWithReuseIdentifier: MQPictureSelectorCellID)

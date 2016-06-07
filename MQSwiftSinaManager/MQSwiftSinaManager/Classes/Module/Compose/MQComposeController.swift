@@ -14,7 +14,6 @@ class MQComposeController: UIViewController, UITextViewDelegate {
     /// 工具栏底部约束
     private var toolbarBottomCons: NSLayoutConstraint?
     
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         // 激活键盘
@@ -86,6 +85,24 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         prepareNavBar()
         prepareToolBar()
         prepareTextView()
+        preparePictureSelectView()
+    }
+    
+    /// 准备照片视图
+    private func preparePictureSelectView() {
+        
+        // 0. 添加子控制器 － 提示：实际开发中发现响应者链条无法正常传递，通常就是忘记添加子控制器
+        // storyboard 中有一个 containerView，纯代码中没有这个控件
+        // 本质上就是一个 UIView
+        // 1> addSubView(vc.view)
+        // 2> addChildViewController(vc)
+        addChildViewController(pictureSelectorVC)
+        
+        // 1. 添加视图
+        view.addSubview(pictureSelectorVC.view)
+        
+        // 2. 自动布局
+        pictureSelectorVC.view.ff_AlignInner(type: ff_AlignType.BottomLeft, referView: view, size: CGSize(width: MQAppWith, height: MQAppHeight * 0.6))
     }
     
     /// 设置输入框
@@ -203,4 +220,8 @@ class MQComposeController: UIViewController, UITextViewDelegate {
         
     /// 工具栏
     private lazy var toolBars = UIToolbar()
+    
+    /// 照片选择控制器
+    private lazy var pictureSelectorVC = MQPictureSelectorController()
+    
 }
