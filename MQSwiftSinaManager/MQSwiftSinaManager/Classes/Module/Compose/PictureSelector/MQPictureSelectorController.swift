@@ -78,6 +78,9 @@ class MQPictureSelectorController: UICollectionViewController,MQPictureSelectorC
             return
         }
         
+        // 记录用户当前选中的照片
+        currentChoosePicture = indexPath.item
+        
         // 访问相册
         let pickVC = UIImagePickerController()
         
@@ -126,10 +129,14 @@ extension MQPictureSelectorController: UIImagePickerControllerDelegate, UINaviga
     /// 内存飙升到 500M 接收到第一次内存警告！内存释放后的结果120M，程序仍然能够正常运行
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         
-        printLog(image)
-        
-        // 追加照片
-        choosePictureArray.append(image)
+        // 用户是否选中了“＋”照片
+        if currentChoosePicture < choosePictureArray.count {
+            // 替换当前选中的图片
+            choosePictureArray[currentChoosePicture] = image
+        }else{
+            // 追加照片
+            choosePictureArray.append(image)
+        }
         // 刷新视图
         collectionView?.reloadData()
         
